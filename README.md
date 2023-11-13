@@ -1,6 +1,6 @@
 # Introduction
 
-This is a CS self-learning repository following [csdiy](https://csdiy.wiki/)
+This is a CS self-learning repository following [csdiy](https://csdiy.wiki/).
 
 No credits, no GPA, pursue knowledge, to collide with the the smartest brains of humanity.
 
