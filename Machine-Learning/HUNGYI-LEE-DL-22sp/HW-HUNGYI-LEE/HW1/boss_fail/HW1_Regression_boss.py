@@ -4,14 +4,6 @@
 # 将SGD优化器换成Adam，学习率使用余弦退火。
 # 提交后得到分数：0.85433，不过private还没突破boss，需要做些微调。
 
-# #  数据集下载
-# 如果下列命令无法下载，可以到下列地址下载数据
-# get_ipython().system("gdown --id '1kLSW_-cW2Huj7bh84YTdimGBOJaODiOS' --output covid.train.csv")
-# get_ipython().system("gdown --id '1iiI5qROrAhZn-o4FPqsE97bMzDEFvIdg' --output covid.test.csv")
-# - Kaggle下载数据:
-# [Kaggle: ml2022spring-hw1](https://www.kaggle.com/competitions/ml2022spring-hw1)
-# - 百度云下载数据: [云盘(提取码：ml22)](https://pan.baidu.com/s/1ahGxV7dO2JQMRCYbmDQyVg)
-
 import math
 import numpy as np
 import pandas as pd
@@ -146,31 +138,6 @@ def select_feat(train_data, valid_data, test_data, select_all=True):
 
     return raw_x_train[:,feat_idx], raw_x_valid[:,feat_idx], raw_x_test[:,feat_idx], y_train, y_valid
     # [:, feat_idx] 保留所有行，保留指定列
-
-# ***TODO1***: 可以查看学习, 尝试更多的优化器 https://pytorch.org/docs/stable/optim.html </font></b>  
-# ***TODO2***:  L2 正则( 可以使用optimizer(weight decay...) 或者 自己实现L2正则</font></b>   
-# - 查看学习更多的优化器:
-#     - [pytorch官网optim](https://pytorch.org/docs/stable/optim.html)
-#     - 也可以搜索一些优化器资料
-#         - 比如[momentum](http://www.cs.toronto.edu/~hinton/absps/momentum.pdf)
-#         - 比如[华盛顿大学-sgd_averaging](https://courses.cs.washington.edu/courses/cse547/18sp/slides/sgd_averaging.pdf)
-#         - 比如[nesterov](https://cs231n.github.io/neural-networks-3/#sgd)
-# ```
-# torch.optim.SGD(
-#      params (iterable):  待优化参数的iterable( model.parameters() )或者是定义了参数组的dict
-#      lr (float, 必填): 学习率
-#      momentum (float, 可选): 动量权重（默认：0）
-#      weight_decay (float, 可选): 权重衰减（L2惩罚）（默认: 0）
-#      dampening (float, 可选): 抑制momentum，越大动量越小 (默认: 0)
-# ```
-# 从下列动量迭代公式可以看出: $\textbf{b}_t \leftarrow \mu \textbf{b}_{t-1} + (1-\tau) g_t$
-# 
-# ```
-#      nesterov (bool, 可选): 是否采用 Nesterov momentum (默认: False)
-#          其核心思想是，计算“预览”位置的梯度而不是当前位置的梯度。计算梯度之前，由于动量项的作用是轻推参数向量mu*v，可以估计未来的位置为x+mu*v，这个位置在接下来实际达到位置的附近。用该位置计算梯度，并修正动量。
-#      maximize (bool, 可选): 是否基于目标函数最大化参数, 反之最小化 (默认: False 即梯度下降)
-#  )
-# ```
 
 def trainer(train_loader, valid_loader, model, config, device):# config 超参数集合
 
@@ -312,11 +279,6 @@ test_loader = DataLoader(test_dataset, batch_size=config['batch_size'], shuffle=
 
 model = My_Model(input_dim=x_train.shape[1]).to(device) # 将模型和训练数据放在相同的存储位置(CPU/GPU)
 trainer(train_loader, valid_loader, model, config, device)
-
-# 启动并运行tensorboard
-# get_ipython().run_line_magic('reload_ext', 'tensorboard')
-# get_ipython().run_line_magic('tensorboard', '--logdir=./runs/ --port=6007')
-# ![tensorBoard](./pic/tensorBoard.png)
 
 # # 测试部分
 # 测试集的预测结果保存到`pred.csv`.
