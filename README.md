@@ -9,8 +9,8 @@ No credits, no GPA, pursue knowledge, to collide with the the smartest brains of
 <span style="color:Red;">Learning</span>	<span style="color:Yellow;">Summarizing	</span><span style="color:Green;">Finished</span>	
 
 - Linear Algebra
-  - <span style="color:Green;">3B1B Linear Algebra</span>
-  - <span style="color:Yellow;">MIT 1806 11fa</span>
+  - [x] 3B1B Linear Algebra
+  - [ ] <span style="color:Yellow;">MIT 1806 11fa</span>
 
 - Computer Science Overview
   - <span style="color:Green;">Crash Course CS</span>
