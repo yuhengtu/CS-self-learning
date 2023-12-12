@@ -1,6 +1,8 @@
 # Progress
 
-Only read the handouts.
+Only read the notes.
+
+I have studied C++ at SEU, so I just read the notes briefly.
 
 # Course
 
