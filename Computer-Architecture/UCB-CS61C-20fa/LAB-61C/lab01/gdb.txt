@@ -1,9 +1,0 @@
-1.set args arg1 arg2
-2.break main
-3.next
-4.step
-5.continue
-6.print
-7.display
-8.info locals
-9.quit

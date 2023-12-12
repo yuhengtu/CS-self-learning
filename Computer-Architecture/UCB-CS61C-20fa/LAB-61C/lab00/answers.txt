@@ -1,9 +1,0 @@
-ls -l
-mv
-chmod
-pwd
-ping
-1.grep -r
-2.ps
-3.kill
-4.diff

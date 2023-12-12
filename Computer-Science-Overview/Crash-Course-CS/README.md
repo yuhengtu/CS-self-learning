@@ -4,4 +4,4 @@
 
 # Reference
 
-[计算机科学速成课笔记](https://shimo.im/docs/PJAUY30F1uYksv0h/read)
+[Crash CS笔记](https://shimo.im/docs/PJAUY30F1uYksv0h/read)
