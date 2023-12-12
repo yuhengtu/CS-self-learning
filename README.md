@@ -4,6 +4,10 @@ This is a CS self learning repository following [csdiy](https://csdiy.wiki/).
 
 No credits, no GPA, pursue knowledge, to collide with the the smartest brains of humanity.
 
+Thanks from bottom of my heart for the open source courses and materials.
+
+If I have uploaded inappropriate content, please contact me at yuhengtuece@gmail.com and I will delete it immediately.
+
 # Syllabus
 
 - Linear Algebra
