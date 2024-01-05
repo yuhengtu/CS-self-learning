@@ -1,5 +1,7 @@
 # 入门
 
+![image-20231212195628102](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312121956183.png)
+
 ## 一元 linear regression
 
 $\theta:=\theta-\alpha\frac{\partial}{\partial\theta_0}Loss\\$     simultaneously update w and b

@@ -1,4 +1,4 @@
-#   INTRO
+#   LEC1 INTRO
 
 ![image-20231101214804594](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202311012148651.png)
 
@@ -453,6 +453,940 @@ bfloat 16，16bit，exponent位数和fp32一样
 ![image-20231116104713395](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202311161047429.png)
 
 ![image-20231116105122423](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202311161051453.png)
+
+
+
+# LEC7 RISC-V
+
+![image-20231211132157002](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312111321139.png)
+
+![image-20231211132435021](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312111324076.png)
+
+Reduced Instruction Set Computing
+
+x86 complex 但是生态完整，RISC 易于理解 但是old and no software，RISC-V 开源，易于理解，近年在工业/科研发展迅速，2010起源于61C教学 
+
+本课程使用RB32
+
+assembly的operand不是变量，而是registers，没有type
+
+32 registers in RISC-V, each register is 32/64 bit wide(32/64 bit is called a word); 8 registers in X86
+
+![image-20231211134812493](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312111348586.png)
+
+
+
+![image-20231211135604603](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312111356700.png)
+
+![image-20231211135715621](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312111357665.png)
+
+![image-20231211135836267](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312111358331.png)
+
+![image-20231211135950934](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312111359974.png)
+
+immediate 立即数 addi，没有subi
+
+![image-20231211142451259](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312111424347.png)
+
+x0的值永远是0，不可改变
+
+![image-20231211142734339](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312111427387.png)
+
+# LEC8
+
+![image-20231212201033203](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312122010244.png)
+
+来源：little endian指从小头剥鸡蛋，big endian反之；RISC-V及90%的处理器是little endian，表示word中byte的排布顺序，最低位在最低地址；不论big/little endian，byte中bit的排布顺序始终是最低位在最低地址
+
+![image-20231213122703829](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312131227949.png)
+
+1025 = 1024 + 1
+
+![image-20231213123431002](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312131234040.png)
+
+DRAM，DDM345，HBM123
+
+![image-20231213130020604](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312131300636.png)
+
+![image-20231213130030159](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312131300202.png)
+
+![image-20231213130058338](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312131300365.png)
+
+![image-20231213130217506](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312131302535.png)
+
+offset = 12，3个integer每个4Byte，must be multiple of 4
+
+![image-20231213201432496](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312132014606.png)
+
+sw的数据流向右
+
+![image-20231213201808576](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312132018623.png)
+
+integer是32bit，和register的大小匹配；char和color channel是8bit，使用 lb 和 sb，offset(Byte)不用是4的倍数
+
+Sign-extension，当操作有符号数时，把符号位x写满其他位置，为了preserve the sign
+
+如果确定是unsigned number，如char/color intensity，用lbu，不做Sign-extension，无sbu
+
+![image-20231213202517533](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312132025571.png)
+
+offset 1，单位Byte
+
+![image-20231213204257455](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312132042509.png)
+
+addi可以被两条语句代替，但是去memory拿数据太慢了，因此保留addi
+
+![image-20231213204509613](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312132045662.png)
+
+branch；otherwise，执行下一行
+
+![image-20231213205327543](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312132053571.png)
+
+每条命令都是32bit，因此 j 相比 beq，可以去到更远的地址（不用存两个reg）
+
+![image-20231213205516643](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312132055674.png)
+
+汇编语言里用 bne 表示 if，更方便
+
+![image-20231213210041920](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312132100958.png)
+
+![image-20231213210203143](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312132102180.png)
+
+记忆：有BLT(bacon, lettuce, tomato) sandwich，没有BGT sandwich
+
+![image-20231213210824789](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312132108826.png)
+
+Loop；复制x8到x9，好习惯，避免污染原数据；x13初始化，因为不能和立即数比较；loop的第一句写退出条件；下一个integer是+4
+
+![image-20231213210849494](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312132108524.png)
+
+# LEC9
+
+![image-20231214004217961](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312140042041.png)
+
+![ ](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312140044208.png)
+
+![image-20231214004516538](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312140045573.png)
+
+实现*12，<<2 + <<3 
+
+![image-20231214005103199](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312140051239.png)
+
+空白处补入最高位（符号位）；-25 / 16 = -1.5625，得到-2；但是C语言一般朝0近似，因此得-1
+
+![image-20231214005114128](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312140051155.png)
+
+.s 汇编程序，.o 机器码，lob.o 包含常用库函数；a.out live in memory，是RISCV instructions，每句32bit 
+
+![image-20231214005856808](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312140058845.png)
+
+![image-20231214010047635](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312140100693.png)
+
+PC，program couter
+
+![image-20231214010331039](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312140103087.png)
+
+32个register中，有一些有特殊用途，因此起了symbolic name
+
+Pseudo-instructions 伪指令，常见汇编语句的简写语法；li load immediate；nop用于等待
+
+![image-20231214010839813](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312140108865.png)
+
+ function
+
+![image-20231214011912116](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312140119175.png)
+
+sum函数
+
+![image-20231214012125414](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312140121444.png)
+
+![image-20231214012357793](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312140123827.png)
+
+![ ](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312140124068.png)
+
+![image-20231214012601153](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312140126192.png)
+
+ 使用 jal 和 ret
+
+![image-20231214012756915](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312140127947.png)
+
+j 本质上是 jal，jr 本质上是 jalr，他们是伪指令
+
+![ ](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312140132519.png)
+
+# LEC10
+
+![image-20231214155811645](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312141558737.png)
+
+RISCV 没有 pop 和 push
+
+x0 是0， x1 是return address， x2 是stack pointer
+
+![image-20231214160221280](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312141602315.png)
+
+入栈，sp--
+
+![image-20231214161018070](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312141610111.png)
+
+leaf，called by others but not call others 
+
+![image-20231214160151064](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312141601104.png)
+
+sw，数据流向右，store from register to memory；前三句话称为prologue，序幕；后四句称为epilogue；最后一句即ret
+
+![image-20231214161649670](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312141616711.png)
+
+nested/recursive function call，一个函数调用另一个，return address x1和argument register会被覆盖，需要go to stack，stack(memory)效率低
+
+register分为saved/temporary or volatile 
+
+![image-20231216105257505](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312161052620.png)
+
+stack pointer, global/thread/frame pointer与compiler有关
+
+![image-20231216105934573](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312161059661.png)
+
+注意saver，即出现nested call时，caller还是callee负责保存该变量（存到s/入栈）
+
+![image-20231216110616848](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312161106895.png)
+
+memory allocation
+
+local var 用stack存，因此stack包含了return address，一些要保存的register， local var
+
+![image-20231216194843669](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312161948728.png)
+
+![image-20231216194911879](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312161949912.png)
+
+![image-20231216195119065](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312161951121.png)
+
+初始x -> a0, y -> a1, mult函数的两个参数分别在a0和a1，因此调用mult之后要重新lw y的值；mv所做的是复制而不是移动；黄色是push，红色是pop
+
+![image-20231216195135411](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312161951443.png)
+
+![image-20231216200942648](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312162009706.png)
+
+![image-20231216200958542](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312162009574.png)
+
+之后将会按照format重新分组
+
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312170119867.png" alt="image-20231217011914776" style="zoom:67%;" />
+
+
+
+# LEC11
+
+dive down another level of abstraction
+
+![image-20231217160909207](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312171609286.png)
+
+ENIAC upeen 1946, solve triangle, women programmer
+
+Von neumann's report was leaked
+
+EDSAC Cambridge 1949, general computer, 35bit, two's complement
+
+![image-20231217162959757](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312171629806.png)
+
+ISA, Instruction Set Architecture 指令集架构，x86(PC)，ARM(phone)，RISCV；向后兼容，8088指令仍能运行在今天的电脑上
+
+![image-20231217163413443](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312171634487.png)
+
+为了兼容性，RV32, RV64, RV128也是32bit instructions
+
+![image-20231217170409956](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312171704028.png)
+
+2^32很多，因此进行分区，每个区存不同类型的instructions；32个寄存器占用5bit；load和immediate有相同的格式；U是很长的立即数
+
+![image-20231217170640599](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312171706645.png)
+
+R-format layout, instruction  destination register(rd), first source register(rs1), second source register(rs2)；register都是5bit
+
+![image-20231217214035266](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312172140336.png)
+
+R-format 的7位opcode都一样；funct3和funct7为了make processor work easier
+
+![image-20231217214114460](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312172141503.png)
+
+![image-20231217214732390](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312172147437.png)
+
+slt 新指令， 如果rs1 < rs2，set rd = 1；sltu，unsigned；add和sub用同样的hardware，但sub需要sign extension，funct7的第二位表示是否需要sign extension
+
+![image-20231217215009188](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312172150245.png)
+
+I-format，有9个指令
+
+12bit，-2048 ～ 2047
+
+![image-20231218104542891](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312181045979.png)
+
+![image-20231218104619991](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312181046064.png)
+
+slt，如果rs1 < imm，set rd = 1；shift amount limit to 5 bit 32种
+
+![image-20231218105230075](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312181052127.png)
+
+![image-20231218105930410](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312181059494.png)
+
+![image-20231218110453454](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312181104508.png)
+
+lh和lb做sign extension，lhu和lbu不做；byte 和 halfword -> place in the least significant position of register最低位；funct3中第一位用于标记sign/unsign
+
+![image-20231218110620629](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312181106684.png)
+
+S-format
+
+12bit imm；rs2中的值是要存到memory的值，rs1是memory基址，imm是offset 
+
+![image-20231218113741401](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312181137463.png)
+
+![image-20231218113755375](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312181137424.png)
+
+![image-20231218114039680](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312181140739.png)
+
+# LEC12
+
+B-format
+
+![image-20231218144836701](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312181448814.png)
+
+因此使用PC- relative addressing，从当前程序位置 + offset(imm) 来寻址；单位是4Byte，即指令长度(实则是2Byte)
+
+![image-20231218150058379](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312181500443.png)
+
+![image-20231218150630693](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312181506755.png)
+
+![image-20231218150649350](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312181506406.png)
+
+但是PC = PC + imm * 4 并不是RISCV的实施方法，对于便宜的小设备，为了让code memory 尽量小，使用16bit的compressed instructions set，RISCV为了支持它，因此使用PC = PC + imm * 2；小心出错
+
+![image-20231218151449180](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312181514245.png)
+
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312181517047.png" alt="image-20231218151720986" style="zoom:25%;" />
+
+![image-20231218152126132](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312181521195.png)
+
+branch不要写成a0 
+
+![image-20231218152352249](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312181523313.png)
+
+![image-20231218153152809](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312181531875.png)
+
+4种type，三种都涉及立即数，立即数放进32bit里必然要sign extension；I-type的20-31为立即数，进入32bit的低12位，最高位进行sign extension；S-type的7-11和25-30为立即数；easy for register to find location
+
+![image-20231218153206547](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312181532600.png)
+
+offset = 16，是10000，去掉最低一位0
+
+![image-20231219113908825](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312191139964.png)
+
+最低四位一直是0011
+
+![image-20231219114512728](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312191145847.png)
+
+
+
+Long imm 20bit, U-format
+
+PC relative 优点是 relative, position-independen，寻址范围 13bit，+-1024条instructions (符号位 32bit 最低位默认0)
+
+![image-20231221172834297](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312211728331.png)
+
+far超出+-1024条instructions范围，使用j，jump有更大的跳转范围
+
+![image-20231221172846681](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312211728719.png)
+
+![image-20231221172818140](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312211728183.png)
+
+第一步LUI赋值高5位，第二步addi赋值低三位
+
+![image-20231221173051215](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312211730257.png)
+
+会出问题，addi会 sign extend 最高位
+
+![image-20231221173259592](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312211732655.png)
+
+RISCV中没有addi unsigned，因此只能人为调整，DEADC；compiler使用伪指令解决这一问题，li自动包含上述步骤，使用li 
+
+![image-20231221173529430](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312211735476.png)
+
+![  ](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312211739998.png)
+
+
+
+J- format，和U- format同样是20bit imm，排布类似B-format
+
+![image-20231221182704906](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312211827003.png)
+
+同理最低位默认0，一共21bit，可以寻址+-2^18条指令
+
+![image-20231221183755502](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312211837574.png)
+
+j是jal x0的伪指令
+
+![image-20231221184010793](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312211840856.png)
+
+jalr是I-format，imm被sign extend to 32bit 后加到rs中；没有默认的最低位
+
+![ ](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312211842093.png)
+
+![image-20231221184607506](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312211846552.png)
+
+
+
+summary
+
+![image-20231221185211909](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312211852968.png)
+
+![image-20231221185332051](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312211853118.png)
+
+
+
+
+
+# LEC13 CALL: Compilation, Assembly, Linking, Loading
+
+Interpret/translate
+
+![image-20231222082402645](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312220824737.png)
+
+![image-20231222082433183](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312220824227.png)
+
+![image-20231222082515127](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312220825177.png)
+
+simulate, apple (change ISA) Back-compatible
+
+![image-20231222083325875](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312220833926.png)
+
+Write interpreter (61A) is much easier than write compiler (164); interpreter兼容各种hardware, compiler translate 到特定hardware 
+
+![image-20231222083423468](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312220834541.png)
+
+从执行文件executable反编译很难
+
+![image-20231222083456522](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312220834572.png)
+
+CALL
+
+compiler, .c -> .s
+
+gcc 直接出.out，gcc -S拆解，loader is OS； compiler/hand translate .c to .s 
+
+![image-20231222084208458](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312220842513.png)
+
+mv is copy 
+
+![image-20231222084640952](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312220846033.png)
+
+
+
+Assembler .s -> .o
+
+![ ](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312220856386.png)
+
+![image-20231222085930658](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312220859711.png)
+
+li: load imm; xor -1, -1是32bit全1, not相当于reverse all 32bit of t1然后存到t0; la有两种，static/PC- relative addressing
+
+![image-20231222090642017](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312220906078.png)
+
+![image-20231222091202737](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312220912796.png)
+
+第一步：替换伪指令；第二步：记录label位置，以便后续跳转；第三步：遇到跳转时会知道跳转多少half-word，用这个值替换label
+
+![image-20231222092159305](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312220921363.png)
+
+PIC相对寻址，数值到最后的.out文件中仍成立；对于la等要求静态（非PIC）32bit地址的，不知道到.out文件会变成多少
+
+![image-20231222093029442](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312220930502.png)
+
+sin lives in math lib
+
+![ ](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312220935274.png)
+
+有些静态（非PIC）32bit地址要有了.out才知道，fill in later (to do)-> relocation table 
+
+![image-20231222093614540](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312220936594.png)
+
+![image-20231222163147301](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312221631411.png)
+
+
+
+Linker .o->.out，compile和assembler可以仅作用于有改动的文件，然后再link所有.o文件
+
+![image-20231222163530516](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312221635579.png)
+
+text是代码，info是两个table和debugging info，library text放在text最后
+
+![image-20231222164123542](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312221641604.png)
+
+![image-20231222164218831](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312221642892.png)
+
+![image-20231222164303107](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312221643165.png)
+
+gp, global pointer point to the beginning of static area; conditional branch 是PC relative寻址，不用relocate 
+
+![image-20231222164550493](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312221645554.png)
+
+address start at 0x10000 = 64k, 往上是text1 2 3, data1 2 3, 之后是heap; stack从顶向下；link knows 来自table 
+
+![image-20231222164946983](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312221649105.png)
+
+symbol not found (找不到symbol), symbol unknown (找不到function), conflict symbol type (有两个同名函数)
+
+![image-20231222165816666](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312221658765.png)
+
+Dynamically Linked Libraries是一种本地的二进制代码库，在程序运行时加载到内存中，在运行时做link，而不是在编译时静态链接到程序中
+
+![image-20231222171840039](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312221718150.png)
+
+runtime 做  link有时间开销，会runtime error
+
+![image-20231222172105201](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312221721260.png)
+
+link at machine code level
+
+![](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312221728393.png)
+
+
+
+loader disk -> memory
+
+![image-20231222174439539](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312221744613.png)
+
+CS162; argc和argv to stack
+
+![image-20231222174541440](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312221745503.png)
+
+
+
+example helloworld
+
+![image-20231222175546721](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312221755786.png)
+
+2 ^ 2 = 4Byte, word-aligned
+
+![image-20231222175556835](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312221755893.png)
+
+.o中只有数字部分，其他都是ppt注释；红色数字是fill in later，之后linker做的事
+
+![image-20231222180530885](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312221805960.png)
+
+![image-20231222180937135](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312221809247.png)
+
+sign extend问题 ，要lui 21而不是20
+
+![image-20231222181131724](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312221811840.png)
+
+
+
+![ ](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312221821740.png)
+
+
+
+
+
+# LEC18 build a RISCV processor/CPU
+
+![image-20231224015444940](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312240154076.png)
+
+![image-20231224015741406](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312240157529.png)
+
+processor 包含 control & datapath 
+
+![image-20231224020139596](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312240201665.png)
+
+datapath是肌肉，执行所有ISA中有的指令，可以为RISCV中每一条指令建立单独的datapath
+
+![image-20231224020424893](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312240204973.png)
+
+store state/data in CPU: PC, register, memory; IMEM instruction memory; DMEM data memory
+
+![](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312241906487.png)
+
+monolithic 整体的; bulky 笨重的
+
+![image-20231224191547359](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312241915442.png)
+
+Stage4 load/store；5步暂时先看做在同一个时钟周期
+
+![image-20231224191615443](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312241916512.png)
+
+MUX 多路复用器（Multiplexer），PC + 4，或者由ALU计算出跳转数进行跳转
+
+![image-20231224192429391](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312241924473.png)
+
+![image-20231224193342929](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312241933007.png)
+
+N/ N = 32，表示32 wires
+
+![image-20231224193713485](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312241937558.png)
+
+Register file包含32个register，two-read single-write register file; output/read delay -> access time, write 也有 access time
+
+![image-20231224193643589](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312241936668.png)
+
+![image-20231224193726423](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312241937491.png)
+
+32个register，每个32 bit，一共1024flip-flop 触发器；两个read rs1 rs2；一个write rd
+
+![image-20231224195414479](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312241954569.png)
+
+![image-20231224195422669](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312241954783.png)
+
+
+
+datapath for R-type
+
+![image-20231224201712809](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312242017032.png)
+
+ use add as example
+
+![image-20231224201833728](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312242018815.png)
+
+Inst -> instruction; next clock tick 更新 PC和Reg[rd]; control logic enable write
+
+![image-20231224202800444](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312242028532.png)
+
+红框是delay，其他类似的小延迟也是delay；alu的结果到下一个时钟才被写入reg1
+
+![image-20231224203523120](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312242035206.png)
+
+
+
+sub 就是多一个control bit，ALUSel
+
+![image-20231224204516873](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312242045960.png)
+
+![image-20231224204538092](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312242045173.png)
+
+![image-20231224204636060](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312242046154.png)
+
+
+
+I-Format, datapath with imm
+
+![image-20231224205013585](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312242050683.png)
+
+加入一个MUX和一个control bit来区分R-type还是I-type
+
+![image-20231225010241474](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312250102611.png)
+
+Works for all other I-format arithmetic instructions (slti,sltiu,andi, ori,xori,slli,srli, srai) just by changing ALUSel
+
+![image-20231225010429594](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312250104689.png)
+
+![image-20231225013723419](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312250137514.png)
+
+
+
+# LEC 19
+
+load
+
+R/I type只有四个phase，load有五个，多了data memory
+
+![image-20231225205812172](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312252058550.png)
+
+WBsel，控制是R还是I type；MemRW = R
+
+![image-20231225210148734](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312252101777.png)
+
+![image-20231225211144225](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312252111274.png)
+
+
+
+store
+
+![image-20231225211254660](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312252112699.png)
+
+WBsel = 0/1都可以，之后会用来优化减少gate数目
+
+![image-20231225211759722](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312252117771.png)
+
+决定是I还是S type只需要5 bit mux，请哦他都一样
+
+![image-20231225212414327](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312252124374.png)
+
+![image-20231225213038982](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312252130027.png)
+
+
+
+B-Format for Branches；12-bit immediate imm[12:1]，最低位默认0
+
+![image-20231225213625147](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312252136197.png)
+
+![image-20231225214156108](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312252141153.png)
+
+BrUn 表示signed/unsigned，BrEq 是否equal，BrLT 是否小于；PC+imm
+
+![image-20231225214505558](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312252145601.png)
+
+![image-20231225215307078](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312252153127.png)
+
+其他ISA need a wide mux
+
+![image-20231225215451319](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312252154360.png)
+
+RISCV编码中把imm[11:1]放在相同位置，因此只需要1bit mux来区分S/B type
+
+![image-20231225220443945](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312252204997.png)
+
+![image-20231225220618974](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312252206017.png)
+
+
+
+JALR: jump and link register, 复用了I format, 没有默认最低位为0, 损失了寻址范围, 减少了指令
+
+![image-20231226024036825](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312260240876.png)
+
+![image-20231226101916016](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312261019122.png)
+
+
+
+JAL, J format
+
+![image-20231226102324139](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312261023190.png)
+
+只需要一个 J type imm
+
+![image-20231226102707408](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312261027462.png)
+
+
+
+U type
+
+![image-20231226102952833](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312261029927.png)
+
+![image-20231226103152096](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312261031196.png)
+
+
+
+# LEC20
+
+component
+
+CSRs 不在processor旁边，在32个register (general purpose integer register)之外；曾经是ISA的一部分，为了模块化被踢出；功能：count 已经执行的 # of cycles, or # of retired instruction, communication with core processors/peripheral, 打印机status: ready/waiting/done -> flag
+
+![image-20231226160215597](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312261602685.png)
+
+类似I-type，20-31用来寻址csr，15-19是source reg/imm，12-14决定哪条指令；csrrw (read write): copy what is in csr to rd, 同时copy what is in rs1 to csr, 如果rd是x0则不执行第一步；csrrs/c (read set/clear flag): rs1是uimm
+
+当15-19是source reg
+
+![image-20231226162352727](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312261623780.png)
+
+当15-19是uimm，sign extend to 32bit 写入csr，高位始终补0
+
+![image-20231226163514435](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312261635514.png)
+
+![image-20231226163908044](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312261639099.png)
+
+![image-20231226164058468](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312261640540.png)
+
+
+
+control
+
+inst[31:0]那一行是IF；control bit 设置 及 reg 两行是decode；ALU和WB是EX；下一个时钟上升沿是WB，包括更新reg内容和下一个PC
+
+![image-20231226171635384](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312261716439.png)
+
+4 phase
+
+![image-20231226172734133](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312261727193.png)
+
+5 phase
+
+![image-20231226172813129](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312261728183.png)
+
+![image-20231226185722640](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312261857774.png)
+
+![image-20231226185804728](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312261858781.png)
+
+control logic
+
+![image-20231230022855636](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312300229379.png)
+
+有两种选择；前者是只能读的memory，仅在设置时可以写
+
+![image-20231230023245345](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312300232394.png)
+
+9 bit用来区别control logic
+
+![image-20231230023515890](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312300235943.png)
+
+第一种方法
+
+![image-20231230023812153](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312300238197.png)
+
+address decoder 出 one-hot
+
+![image-20231230023825771](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312300238810.png)
+
+第二种方法
+
+![image-20231230024043245](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312300240289.png)
+
+![image-20231230024058516](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312300240557.png)
+
+
+
+# LEC21 pipelining
+
+how to measure performance
+
+![image-20231231013959649](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312310139713.png)
+
+![image-20231231131739362](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312311317449.png)
+
+Latency：完成一个任务要多少时间
+
+Throughput：一定时间内能完成多少任务
+
+redundancy：冗余计算，计算多个结果后vote
+
+time to execute a program such as picture display; datacenter的energy cost一年后就超过了hardware cost; power (功率)不是好的衡量标准，energy (能量)才是
+
+![image-20231231131753111](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312311317157.png)
+
+“Iron Law” of Processor Performance
+
+![image-20231231134232758](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312311342833.png)
+
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312311346711.png" alt="image-20231231134602664" style="zoom:25%;" />
+
+有些ISA中不是每条指令都耗时1cycle；Superscalar processors: execute >1 instructions per cycle
+
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312311346972.png" alt="image-20231231134614899" style="zoom:25%;" />
+
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312311352351.png" alt="image-20231231135240297" style="zoom:25%;" />
+
+![image-20231231135724493](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312311357547.png)
+
+
+
+energy efficiency
+
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312311403889.png" alt="image-20231231140350837" style="zoom:25%;" />
+
+transistor is slower at lower voltage
+
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312311409889.png" alt="image-20231231140925833" style="zoom:25%;" />
+
+C is capacitance
+
+![image-20231231141620893](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312311416950.png)
+
+![image-20231231142059896](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312311420951.png)
+
+![image-20231231142139977](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312311421025.png)
+
+![image-20231231142343772](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312311423822.png)
+
+
+
+Pipelining -> increase compute throughput
+
+理论上speed * 4，实际上speed * 2.3，因为有初始和最后的入和出；如果有1000个人，把两个步骤变成20min，总时间不会变化（仅初始和最后的入和出有优化）
+
+![image-20231231235221320](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312312352421.png)![image-20231231235350229](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312312353295.png)
+
+
+
+# LEC22
+
+RR和RW时间较短；read 亮左半部分，write 亮右半部分
+
+single-cycle CPU
+
+![image-20240101165910320](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401011659366.png)
+
+时间统一200ps + pipeline
+
+![image-20240101165931255](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401011659319.png)
+
+二者对比
+
+![image-20240101170334530](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401011703573.png)
+
+Datapath
+
+![image-20240101204534136](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401012045166.png)
+
+insert registers, Pipeline registers separate stages, hold data for each instruction in flight；前三个stage需要PC，第四个MA stage需要PC + 4，
+
+![image-20240101204555175](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401012045209.png)
+
+![image-20240102150322728](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401021503821.png)
+
+
+
+pipeline hazard 危险；control hazard是
+
+![image-20240101171631458](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401011716501.png)
+
+如ALU计算和PC+4同时使用ALU
+
+![](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401011728869.png)
+
+![image-20240101202720482](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401012027514.png)
+
+![image-20240101203226505](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401012032534.png)
+
+![image-20240101203437833](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401012034865.png)
+
+![image-20240101203853953](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401012038992.png)
+
+
+
+Data Hazard
+
+read和write同时发生
+
+![image-20240102152241090](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401021522185.png)
+
+reg R/W只要100ps，是一个cycle时间的一半，两者各占一半时间；这在复杂CPU中不一定成立，不做深入
+
+![image-20240102152521168](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401021525221.png)
+
+另一个例子
+
+![image-20240102152744071](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401021527133.png)
+
+delay 2 cycles
+
+![image-20240102153045396](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401021530451.png)
+
+![image-20240102153332837](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401021533923.png)
+
+以直接传值（another mux + control bit），代替等待2个stage写入reg
+
+![image-20240102153415942](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401021534986.png)
+
+![image-20240102153637491](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401021536545.png)
+
+control mux: if source reg == des reg != x0, then forward
+
+![image-20240102153949605](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401021539662.png)
+
+![image-20240102155606962](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401021556047.png)
+
+
+
+# LEC23
+
+ 
+
+
+
+
+
+
+
+
+
+
 
 
 

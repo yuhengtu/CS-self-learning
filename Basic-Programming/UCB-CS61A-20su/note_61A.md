@@ -1188,9 +1188,9 @@ nest = (10, 20, [30])
 
 非局部赋值模式是具有高阶函数和词法作用域的编程语言的普遍特征。
 
-在一个函数体内，一个名称的所有实例必须引用同一个帧。因此，Python 无法在非局部帧中查找名称的值，然后在局部帧中绑定相同的名称，因为同名名称将在同一函数的两个不同帧中被访问。
+删除nonlocal报错，Python 无法在非局部帧中查找名称的值，然后在局部帧中绑定相同的名称。
 
-![image-20231207110323252](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312071103351.png)
+![image-20231215085127168](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312150851275.png)
 
 多个 unlocal 绑定，每个 withdraw 实例都保持自己的 balance 状态
 
@@ -1204,7 +1204,126 @@ nest = (10, 20, [30])
 
 
 
-2.4.7 列表和字典实现；2.4.8 调度字典（Dispatch Dictionaries）；2.4.9 约束传递 (Propagating Constraints)
+可变列表实现，消息传递 (Message passing)
+
+不能使用 None 来空列表，因为两个空列表是不同的，但 None 始终是 None；使用empty表示
+
+```python
+>>> def mutable_link():
+        """返回一个可变链表的函数"""
+        contents = empty
+        def dispatch(message, value=None):
+            nonlocal contents
+            if message == 'len':
+                return len_link(contents)
+            elif message == 'getitem':
+                return getitem_link(contents, value)
+            elif message == 'push_first':
+                contents = link(value, contents)
+            elif message == 'pop_first':
+                f = first(contents)
+                contents = rest(contents)
+                return f
+            elif message == 'str':
+                return join_link(contents, ", ")
+        return dispatch
+      
+# 构建链表，反序添加每个元素即可
+>>> def to_mutable_link(source):
+        """返回一个与原列表相同内容的函数列表"""
+        s = mutable_link()
+        for element in reversed(source):
+            s('push_first', element)
+        return s
+    
+>>> s = to_mutable_link(suits)
+>>> type(s)
+<class 'function'>
+>>> print(s('str'))
+heart, diamond, spade, club
+>>> s('pop_first')
+'heart'
+>>> print(s('str'))
+diamond, spade, club
+```
+
+
+
+字典实现，双元素列表
+
+```python
+>>> def dictionary():
+        """返回一个字典的函数实现"""
+        records = []
+        def getitem(key):
+            matches = [r for r in records if r[0] == key]
+            if len(matches) == 1:
+                key, value = matches[0]
+                return value
+        def setitem(key, value):
+            nonlocal records
+            non_matches = [r for r in records if r[0] != key]
+            records = non_matches + [[key, value]]
+        def dispatch(message, key=None, value=None):
+            if message == 'getitem':
+                return getitem(key)
+            elif message == 'setitem':
+                setitem(key, value)
+        return dispatch
+      
+>>> d = dictionary()
+>>> d('setitem', 3, 9)
+>>> d('setitem', 4, 16)
+>>> d('getitem', 3)
+9
+>>> d('getitem', 4)
+16
+```
+
+
+
+调度字典（Dispatch Dictionaries）
+
+`dispatch` 函数是实现抽象数据消息传递接口的通用方法。balance 是一个数字，而消息存款 deposit 和取款 withdraw 则绑定到函数。这些函数可以访问 dispatch 字典，通过将 balance 存储在 dispatch 字典中而不是直接存储在帐户帧中，避免在存款和取款中对非局部语句的需要。
+
+```python
+# 可变帐户是作为字典实现的。它有一个构造器 amount 和选择器 check_balance，以及存取资金的功能。
+def account(initial_balance):
+    def deposit(amount):
+        dispatch['balance'] += amount
+        return dispatch['balance']
+    def withdraw(amount):
+        if amount > dispatch['balance']:
+            return 'Insufficient funds'
+        dispatch['balance'] -= amount
+        return dispatch['balance']
+    dispatch = {'deposit':   deposit,
+                'withdraw':  withdraw,
+                'balance':   initial_balance}
+    return dispatch
+
+def withdraw(account, amount):
+    return account['withdraw'](amount)
+
+def deposit(account, amount):
+    return account['deposit'](amount)
+
+def check_balance(account):
+    return account['balance']
+
+a = account(20)
+deposit(a, 5)
+withdraw(a, 17)
+check_balance(a)
+```
+
+
+
+约束传递 (Propagating Constraints)
+
+
+
+
 
 
 
