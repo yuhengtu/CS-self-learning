@@ -21,14 +21,15 @@ If I have uploaded inappropriate content, please contact me at yuhengtuece@gmail
   - [SEU Python & Data Science 22sp](https://github.com/yuhengtu/CS-self-learning/tree/master/Basic-Programming/SEU-Python-and-Data-Science)
 - Data Structure & Algorithm
   - [Acwing Data Structure & Algorithm](https://github.com/yuhengtu/CS-self-learning/tree/master/Data-Structure-and-Algorithm/Acwing-Acwing-Data-Structure-and-Algorithm)
-- Computer Architecture
-  - [UCB CS61C 20fa](https://github.com/yuhengtu/CS-self-learning/tree/master/Computer-Architecture/UCB-CS61C-20fa)
-- Computer Networking
-  - UMASS-Network-20fa
-
 - Machine Learning
   - [Coursera ML 22](https://github.com/yuhengtu/CS-self-learning/tree/master/Machine-Learning/Coursera-ML-22)
   - [NTU DL(HUNGYI-LEE) 22sp](https://github.com/yuhengtu/CS-self-learning/tree/master/Machine-Learning/NTU-DL(HUNGYI-LEE)-22sp)
+- Signal Processing
+  - (MIT Signal & System 11sp)(https://github.com/yuhengtu/CS-self-learning/tree/master/Signal-Processing/MIT-Signal-System-11sp)
+- Computer Architecture
+  - [UCB CS61C 20fa](https://github.com/yuhengtu/CS-self-learning/tree/master/Computer-Architecture/UCB-CS61C-20fa)
+- Computer Networking
+  - (UMASS-Network-20fa)(https://github.com/yuhengtu/CS-self-learning/tree/master/Computer-Network/UMASS-Network-20fa)
 
 # Others in my knowledge system (learn at SEU)
 
@@ -40,7 +41,7 @@ If I have uploaded inappropriate content, please contact me at yuhengtuece@gmail
 - Computer Network
 - Microcomputer Systems & Interfaces (Assembly)
 - Embedded Development (Arduino)
-- Signal and System
+- Signal & System
 - Digital Signal Processing
 - Fundamentals of Circuit
 - Digital Logic Circuit
