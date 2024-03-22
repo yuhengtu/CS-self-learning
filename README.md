@@ -20,10 +20,16 @@ If I have uploaded inappropriate content, please contact me at yuhengtuece@gmail
   - [Acwing C++ Grammar](https://github.com/yuhengtu/CS-self-learning/tree/master/Basic-Programming/Acwing-C%2B%2BGrammar)
   - [SEU Python & Data Science 22sp](https://github.com/yuhengtu/CS-self-learning/tree/master/Basic-Programming/SEU-Python-and-Data-Science)
 - Data Structure & Algorithm
+  - [UCB CS170 24sp](https://github.com/yuhengtu/CS-self-learning/tree/master/Data-Structure-and-Algorithm/UCB-CS170-24sp)
   - [Acwing Data Structure & Algorithm](https://github.com/yuhengtu/CS-self-learning/tree/master/Data-Structure-and-Algorithm/Acwing-Acwing-Data-Structure-and-Algorithm)
+
 - Machine Learning
   - [Coursera ML 22](https://github.com/yuhengtu/CS-self-learning/tree/master/Machine-Learning/Coursera-ML-22)
+  - [UCB CS189 24sp](https://github.com/yuhengtu/CS-self-learning/tree/master/Machine-Learning/UCB-CS189-24sp)
   - [NTU DL(HUNGYI-LEE) 22sp](https://github.com/yuhengtu/CS-self-learning/tree/master/Machine-Learning/NTU-DL(HUNGYI-LEE)-22sp)
+- Cryptography
+  - [UCB CS171 24sp](https://github.com/yuhengtu/CS-self-learning/tree/master/Cryptography/UCB-CS171-24sp)
+
 - Signal Processing
   - [MIT Signal & System 11sp](https://github.com/yuhengtu/CS-self-learning/tree/master/Signal-Processing/MIT-Signal-System-11sp)
 - Computer Architecture
