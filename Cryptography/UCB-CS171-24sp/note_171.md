@@ -23,6 +23,10 @@ In more detail, besides the special topics, proposed CS171’s core course conte
 
 
 
+office hour idea: crypto definition & proof for adversarial training/backdoor attack
+
+
+
 # LEC1 Private-key, shift/substitution/vigenère 
 
 ![image-20240121231159441](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401221511567.png)
@@ -120,6 +124,8 @@ we cannot make |M|>|K|
 M(c): for c, decrypt with all possible k to get a set of message; 可能有overlap，因此$|M(c)|\leq\mathcal{K}$，K < M
 
 One-time pad K = M, optimal
+
+perfectly secret means against unbounded attacker, no neg prob is included
 
 ![image-20240129164642632](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401300846682.png)
 
@@ -387,7 +393,7 @@ PRF: 可以query; weak-PRF: 发送一个长度为n的指定bitstring x，收到�
 
 key is hidden, IV is available to attacker
 
-![image-20240212190951690](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202402121909751.png)
+![image-20240212190951690](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202402121909751.png)s
 
 Stateful
 
@@ -754,7 +760,7 @@ still private key, attacker change the c, integrity problem
 
 ![image-20240313153041986](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403131530021.png)
 
-Unforgeability 不可为造性；attacker想要生成valid (m,t) pair；A has oracle access to Mac_k, M is the list of query A tried；A then choose m* and t*, tag is n (security parameter ) bit long
+Unforgeability 不可为造性；attacker想要生成valid (m,t) pair；A has oracle access to Mac_k, M is the list of query A tried；A then choose m* and t*, tag is n (security parameter) bit long
 
 ![image-20240313153649797](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403131536867.png)
 
@@ -1137,15 +1143,13 @@ e1 = 100..0; e2 = 0100...0; hc(x,ei) = i^th^ bit of x
 
 Pr = 1/2 + non-neg, 可以证明Pr > 3/4时以下模式work
 
-？？？？？
-
 ![image-20240318000807265](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403180008401.png)
 
 f(x)*ei = xi; 第四步，两个![image-20240318004315185](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403180043245.png) cancel out
 
 ![image-20240318003846467](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403180038684.png)
 
-
+![image-20240325010313356](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403250103411.png)
 
 OWP -> PRG with one more bit (from Hardness Concentration)
 
@@ -1187,6 +1191,10 @@ PSF的key come from PSG的seed, both cannot leak
 
 ![image-20240318015025576](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403180150628.png)
 
+![image-20240325010138835](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403250101971.png)
+
+![image-20240325010155146](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403250101209.png)
+
 ![ ](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403180153199.png)
 
 ![image-20240318015553552](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403180155609.png)
@@ -1197,7 +1205,7 @@ Proof hint: hybrid G->Uniform
 
 
 
-# LEC13 number theory (cyclic Group), DLOG, CRHF , CDH/DDH, key exchange, public key crypto: PKE (Public-Key Encryption) + digital signature
+# LEC13 KDC, cyclic group, DLOG, CRHF, CDH/DDH, key exchange, public key crypto: PKE + Digital Signature
 
 1. set up key
 2. 每个对象单独一个key，大量存储空间，有集体泄漏风险，频繁更新
@@ -1209,11 +1217,11 @@ KDC maintain private key with every user kA, kB; generate fresh key k which is A
 
 Problem: KDC can decrypt everybody's message
 
-？？？？？
-
 ![image-20240318151003445](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403181510519.png)
 
+![image-20240325010441088](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403250104148.png)
 
+***
 
 Public-Key Cryptography
 
@@ -1269,15 +1277,21 @@ In practice, p q are very long, 1000 bit, there are endless p q pairs
 
 ![image-20240319002627641](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403190026745.png)
 
+***
+
 DLOG is the hardest one to solve, CDH is the second-hardest, and DDH is the easiest. 
 
 in these group DLOG problem is hard
 
 ![image-20240318180130081](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403181801225.png)
 
+![image-20240503164852563](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202405031648641.png)
+
 DLOG can construct OWF, attacker cannot recover x
 
 ![image-20240318181548766](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403181815938.png)
+
+***
 
 dot_operation(g^x^, h^r^); 输出相较输入进行了压缩
 
@@ -1287,7 +1301,7 @@ proof: 如果破解CRHF，即找到冲突数据(𝑥, 𝑟), (𝑥’, 𝑟’)�
 
 ![image-20240318183104298](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403181831387.png)
 
-
+***
 
 The Diffie-Hellman Problems
 
@@ -1299,7 +1313,7 @@ given g^x^ and g^y^, cannot compute g^xy^
 
 2. decisional variant
 
-Harder than computational variant
+easier than computational variant
 
 ![image-20240318183410279](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403181834350.png)
 
@@ -1315,6 +1329,10 @@ other group using more complicated operation -> Elliptic Curve Groups: each elem
 
 ![image-20240318184729327](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403181847405.png)
 
+![image-20240503200354892](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202405032003006.png)
+
+***
+
 realize public key crypto
 
 Alice and Bob talk on public internet channel
@@ -1327,7 +1345,9 @@ b=0, 给attacker key; b=1, 给attacker random string, attacker 区分不了
 
 ![image-20240318191018127](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403191337100.png)
 
-Public-Key Encryption similar to Enc (confidentiality); Digital Signatures similar to Mac (integrity )
+***
+
+Public-Key Encryption similar to Enc (confidentiality); Digital Signatures similar to Mac (integrity)
 
 ![image-20240319000038399](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403190000550.png)
 
@@ -1343,7 +1363,7 @@ Alice cannot recover b, he just calculate g^ab^
 
 
 
-# LEC14 PKE: EAV=CPA/CCA, ElGamal encryption, hybrid encryption
+# LEC14 PKE: EAV=CPA/CCA, PKE construction: ElGamal, hybrid encryption
 
 ![image-20240319004724534](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403190047601.png)
 
@@ -1371,7 +1391,9 @@ Enc oracle省略了因为默认所有人都可以；也正是因为所有人都�
 
 ![](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403190119930.png)
 
+![image-20240503153359758](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202405031533867.png)
 
+***
 
 Construction of PKE
 
@@ -1384,6 +1406,8 @@ c2 = m g^xr^; c1^sk^ = g^XR^; output m
 proof: adversary break ElGamal Encryption, then he can break DDH 
 
 ![image-20240319020551740](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403190205862.png)
+
+***
 
 Enc之后c的长度是m的两倍
 
@@ -1407,7 +1431,7 @@ receiver decrypt encapsulated封装 key to get k (public scheme), and use k to d
 
 
 
-# LEC15
+# LEC15 hybrid encryption, KEM, Composite Order Group, RSA
 
 ![image-20240321170300557](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403211703750.png)
 
@@ -1429,11 +1453,11 @@ H2是纯随机的，因此必然是1/2
 
 ![image-20240321171727750](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403211717848.png)
 
-问题：可不可以把H1和H2内容变化的顺序调换？H1变绿色，H2变红色 -> 不可以 略
+问题：可不可以把H1和H2内容变化的顺序调换?H1变绿色，H2变红色 -> 不可以 略
 
 CCA security proof 略
 
-
+***
 
 KEM: another PKE (not hybrid encryption)
 
@@ -1447,9 +1471,9 @@ Enc algo input is only public-key, no message, so attacker cannot query message
 
 k=Decaps(c, sk)
 
-？？？？？？？/
-
 ![image-20240321174008043](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403211740113.png)
+
+![image-20240325133628623](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403251336685.png)
 
 KEM中attacker只能看见pk  c c‘，k是中间过程
 
@@ -1473,10 +1497,595 @@ another valid cipher text encrypting m, ask decrypt oracle
 
 可以get到一个new valid cipher text (但是不知道m·m'是什么)
 
-需要要c和c‘用the same key
+需要c和c‘用the same key
 
 ![image-20240321195521785](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403211955868.png)
 
+***
+
+RSA Encryption
+
+ZN is a group with respect to addition mod N
+
+Removes 0 and elements that are not-coprime to N -> $\mathbb{Z}_{N}^*$ is a group with respect to multiplication mod N
+
+N是两个大质数的乘积；gcd: 最大公因数 (Greatest common divisor)
+
+order of $\mathbb{Z}_{N}^*$: (N-1) - ([N/p]) - ([N/q]) = (p-1)(q-1)
+
+如果要从$\mathbb{Z}_{N}^*$任取一个数，sample from 1～N-1，run gcd algorithm (poly time)，如果=1则返回，否则再sample一次
+
+![image-20240324151703848](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403241517943.png)
+
+![image-20240324160339784](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403241603923.png)
+
+breaking RSA is easier than breaking factoring
+
+指数mod $\phi\left(N\right)$； 数字mod N
+
+![image-20240324174220612](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403241742759.png)
+
+![image-20240324160645585](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403241606656.png)
+
+![image-20240324162633717](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403241626834.png)
+
+N是两个大质数乘积，e用来正向计算，d使ed = 1，随机pick y，attacker输出x，想让x^e^ = y 
+
+![image-20240324163723846](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403241637914.png)
+
+Enc is deterministic, not randomized, which is insafe
+
+![image-20240324172051024](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403241720130.png)
+
+![image-20240324174644189](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403241746287.png)
+
+lsb: least significant bit 最低位 (r本来就是randomb)
+
+注意：这里的Enc的输入m是one bit，因此对于message的每个bit都要sample一个r 
+
+![image-20240324175319584](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403241753745.png)
+
+
+
+# LEC16 mid2 review, Merkle Hash Construction, Imply Map
+
+![image-20240324182639522](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403241826747.png)
+
+![image-20240324182810648](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403241828725.png)
+
+![image-20240324182829191](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403241828265.png)
+
+![ ](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403242313747.png)
+
+![image-20240324182846597](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403241828733.png)
+
+![image-20240324182927577](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403241829708.png)
+
+![image-20240324183010129](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403241830211.png)
+
+![image-20240324235541391](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403250000984.png)
+
+![image-20240324183024091](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403241830165.png)
+
+![image-20240324183117674](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403241831764.png)
+
+图中set l = 3；all Hash use same seed
+
+![image-20240324183202082](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403241832178.png)
+
+![image-20240324183214144](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403241832274.png)
+
+![image-20240325001259421](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403250012567.png)
+
+![ ](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403250013517.png)
+
+![image-20240324183227937](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403241832015.png)
+
+Bob calculate hash(x5, x6); hash(h23, h24); hash(h11, h12)得到h, 验证
+
+![image-20240325002612045](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403250026200.png)
+
+![image-20240324183246776](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403241832865.png)
+
+![image-20240325003550667](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403250035837.png)
+
+![image-20240324183543621](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403241835727.png)
+
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403241836035.png" alt="image-20240324183623890" style="zoom:50%;" />
+
+
+
+# LEC17  Digital Signature, hash-and-sign, Schnorr Identification Scheme -> Schnorr Signature Scheme, PKI
+
+Digital Signatures
+
+Non-repudiation 不可否认: MAC中双方都有secret key，因此verifier也有能力sign，mac方可以否认自己sign而推卸给verifier；digital signature不允许这种情况出现
+
+![ ](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404071739948.png)
+
+Vrfy is anyone in the world (all users of a software doing software update)
+
+![image-20240408134158704](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404081341809.png)
+
+attacker cannot sign a message they haven't see signature previously
+
+![image-20240408140731262](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404081407346.png)
+
+![image-20240408141956953](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404081419029.png)
+
+![image-20240408142531310](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404081425380.png)
+
+![image-20240408143002602](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404081430652.png)
+
+***
+
+arbitrary length
+
+![image-20240408143458329](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404081434388.png)
+
+Proof
+
+![image-20240408143831895](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404081438942.png)
+
+![image-20240408144246479](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404081442531.png)
+
+***
+
+Schnorr Signature Scheme <- Schnorr Identification Scheme (based on discrete-log)
+
+![image-20240408150100220](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404081501279.png)
+
+The company send you a email with pk (known to the world) and send somebody with sk to your home, that guy is prover and you are verifier
+
+I is initialization msg; st is state; r (challenge msg ) <- randomly sampled from some space $\Omega_{pk}$; s is response
+
+I r s can be eavesdropped
+
+![image-20240408151854593](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404081518670.png)
+
+![image-20240408154214804](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404081542886.png)
+
+$Tran_{sk}$ 指的是一对prover和verifier的交流过程 (被attacker窃听)
+
+![image-20240408163707065](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404081637175.png)
+
+绿色是query (attacker可以在任何阶段make query)，红色带星号是attacker的最终test结果
+
+![image-20240408164142781](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404081641949.png)
+
+P1 didn't use sk; P2 use sk = x
+
+![image-20240408164911974](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404081649028.png)
+
+![image-20240408171651700](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404081716825.png)
+
+I(k) and r are randomized, s depend on r and I -> Tran_sk is useless; eavesdrop can just see (I,r,s), they are passive, cannot play a role in the game
+
+![image-20240408172406330](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404081724418.png)
+
+break security -> break discrete log; all randomness except r are the same for two case, use r1 r2 as challenge
+
+![ ](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404081742773.png)
+
+identification scheme -> signature scheme
+
+we only have prover, dont have verifier in signature scheme, use Hash(I,m) in replace of r
+
+![image-20240408175459395](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404081754496.png)
+
+右侧verify前要重新计算r = H(I,m)
+
+![image-20240411171101422](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404111711538.png)
+
+***
+
+One greatest application: Bob and Alice want to communicate using private key, they use public encryption to get private key, how does Alice make sure he get Bob’s correct public key?
+
+third-party key distribution center -> certification authority / CA
+
+PKI: public-key infrastructures
+
+![image-20240408183446666](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404081834811.png)
+
+这里用名字Bob参与签名，还可以用email等
+
+![image-20240408223541209](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404082235359.png)
+
+![image-20240408223600196](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404082236253.png)
+
+![image-20240408223608356](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404082236444.png)
+
+
+
+# LEC18 IBE, bilinear group -> 3-party key exchange, IBE construction, IBE -> Digital signature, IBE -> CCA PKE
+
+pp -> public parameter, ID; CA/PKG -> certification authority/private-key generator; SK -> secret key specific to the identity
+
+![image-20240418160035182](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404181600378.png)
+
+mst: master secret key; pp is public, mst is private only at CA (master means most powerful secret key, used to generate SK_ID and only can be accessed by CA)
+
+SK_ID: identity specific secret key, student request secret key for email address, CA use mst to generate and send SK_ID to student
+
+SK_ID can be genrated after c is generated; people at CA can decrypt all c
+
+![image-20240418161551158](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404181615265.png)
+
+security definition
+
+![image-20240418162858143](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404181628281.png)
+
+m = 0/1, adversary cannnot tell (can also describe as encrypt m_b: m0/m1)
+
+![image-20240418162911029](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404181629092.png)
+
+Weaker notion: Selective Security
+
+![image-20240418164356606](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404181643719.png)
+
+![image-20240503145712593](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202405031457671.png)
+
+***
+
+bilinear group
+
+review:
+
+DDH problem
+
+![image-20240424224902227](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404242249395.png)
+
+G_T -> target group, is a group different from G
+
+DDH中的C就是上图的T 
+
+![image-20240424224911466](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404242251314.png)
+
+$\beta$ = 0 -> non-random, e(g,g)^abc^; $\beta$ = 1 -> random
+
+claim: adversary can compute e(g,g)^ab^, e(g,g)^bc^, e(g,g)^ac^, but cannot compute e(g,g)^abc^
+
+![image-20240424230302554](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404242303682.png)
+
+application
+
+Alice can compute it by getting e(g,g)^bc^ then 取a次方 to get e(g,g)^abc^; non-interactive means no need to communicate
+
+![image-20240424232002064](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404242320169.png)
+
+***
+
+Hash(id) 求a次方
+
+![image-20240424232941910](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404242329986.png)
+
+![image-20240424233625046](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404242336109.png)
+
+***
+
+Digital Signatures from IBE -> smallest signature size
+
+(Digital Signature has 3 algo, IBE has 4 algo)
+
+the signature is the id secret key (is made public)
+
+![image-20240425002619050](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404250026167.png)
+
+b reak signature -> break IBE
+
+![image-20240425005022754](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404250050862.png)
+
+***
+
+CCA PKE from IBE
+
+![image-20240425005651763](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404250056822.png)
+
+CCA Security from IBE, start with CCA1 (no phase-2 query, only phase-1)
+
+4 algo -> 3 algo; CCA require randomness in Enc -> E() and id are randomized 
+
+![image-20240425133424133](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404251334213.png)
+
+![image-20240425010046019](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404250100089.png)
+
+id* is sampled randomly -> CCA1 secure
+
+![image-20240425011922487](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404250119639.png)
+
+![image-20240425011935792](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404250119845.png)
+
+![image-20240425140718186](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404251407322.png)
+
+In Enc, run the Gen algo for digital signature
+
+id is the verify key (public key of signature scheme); c is message; $\sigma$ is signature on this msg under id
+
+![image-20240425141132130](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404251411232.png)
+
+only decrypt when verification pass
+
+![image-20240425143252458](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404251432612.png)
+
+![image-20240425144049929](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404251440010.png)
+
+
+
+# LEC19 Commitment Scheme, to a bit (HC) / group element (Pederson) / vector (Merkle) / poly (KZG)
+
+x is private to sender, sender know x, receiver do not know x
+
+sender commit x to receiver without revealing it
+
+after sender open x, receiver can verify that the x sender commit was not changed
+
+(application: sender promise a price but do not reveal, after promise he cannot change the price)
+
+srs is known to both side
+
+has 2 security property: binding/hiding
+
+![image-20240425144216221](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404251442266.png)
+
+1. Commitment Scheme From Hardness Concentration -> commit a bit
+
+Permutation -> unique
+
+$\langle r,c_2 = s\rangle\oplus x)$ 表示r和c2的inner product 与x异或
+
+review the hardness concentration for the hiding: pseudo OTP
+
+![image-20240425154753235](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404251547332.png)
+
+encryption only guarantee neg prob
+
+sender is malicious, can choose randomness
+
+![ ](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404251558319.png)
+
+2. Pederson Commitment Schemes -> commit a group element
+
+q: 阶数, h: random group element
+
+[Commitment Scheme From Hardness Concentration can ensure binding even for unbounded committer (with endless time); but Pederson Commitment Scheme can be broken if committer are unbounded, just finding collision is only computationally hard]
+
+![image-20240425161453045](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404251614163.png)
+
+3. Merkle Commitment Schemes -> commit a vector 
+
+succinctly 简洁的 want commitment to be short & much less than n
+
+generate Pederson Commitment for each x & r 
+
+![image-20240425170856334](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404251708474.png)
+
+![ ](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404251713964.png)
+
+![ ](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404251719524.png)
+
+Partial Opening, sender generate 很长的 x&r, 现在不想全部open (占空间 传输慢)，只想open第k个位置 -> 只发送tree的一部分
+
+![image-20240425173334237](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404251733362.png)
+
+4. Commit a Polynomial f(x) of degree n−1 Succinctly
+
+review: Lagrange interpolation
+
+![image-20240425173716477](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404251737605.png)
+
+KZG Polynomial Commitment
+
+srs 中 typo $h_{d}$ -> $h_{d-1}$
+
+Short & Succincte -> long poly become only one group element
+
+[cannot obtain degree d, because was not given in srs and cannot compute it]
+
+commit: on input z, f(z) = s, send s to receiver; f(z) = s -> g(z) = 0 -> x−z divides f(x)−s -> degree of T(x) is d-2 (f(x) is degree d-1)
+
+run commit algo on the d-2 degree T, get W and send W as opening 
+
+![ ](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404251741331.png)
+
+![image-20240425175034197](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404251750285.png)
+
+![image-20240425205005872](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404252050039.png)
+
+a faster way to check 3 equation altogether
+
+![image-20240425205604708](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404252056834.png)
+
+![image-20240425210104649](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404252101831.png)
+
+![image-20240425210511632](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404252105901.png)
+
+![image-20240425210641853](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404252106930.png)
+
+![image-20240425211021259](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404252110360.png)
+
+
+
+# LEC20 Zero-Knowledge Proof, three coloring problem
+
+w/witness is private; x & C/circuit is public
+
+prover want to prove C(x,w) = 1
+
+[for example, prover want to prove that he has sol w to a puzzle x, but he want to keep w hidden]
+
+simulator S is a PPT machine, honest P and malicious V *, V * can only learn as many things from honest P as S (S and P are indistinguishable)
+
+D is distinguisher, simulator is protocol-specific
+
+soudness is only for false statement; zero-knowledge is only for true statement
+
+Zero-knowledge 中的两项：左为V *和honest P交流后V *output的内容，右为simulator output的内容
+
+in simulator world nothing a bout w can be learned (not even interact with the honest prover), indistinguishable -> V* cannot learn anything about w either 
+
+[you ask teacher a question, teacher always randomly answer yes/no with half prob -> S is a machine simulate teacher's behavior, so you can just stay home and play with the simulator, the teacher need not to be present]
+
+![image-20240425214325616](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404252143748.png)
+
+![image-20240425211153590](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404252111725.png)
+
+![image-20240504030934100](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202405040309192.png)
+
+![image-20240504031054849](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202405040310916.png)
+
+***
+
+![image-20240425221136199](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404252211390.png)
+
+prove that a graph is 3-colorable 
+
+Permutation 如 RGB -> GBR, color not repeated
+
+rv is each randomness for each vertex; permutation is same
+
+permutation的作用 (intuitively): prover open只一条edge，由于permutation verifier cannot learn something
+
+after prover make commitment, his hands are tied, he cannot make any more changes
+
+![image-20240425225340618](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404252253754.png)
+
+![image-20240425230523645](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404252305786.png)
+
+in every execution rv & $\Pi$ are different
+
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404252328626.png" alt="image-20240425232804485" style="zoom:45%;" />
+
+soundness argument is in real time, you cannot fail, if you fail you don't own the capability
+
+zero-knowledge argument need not to be in real time, just to claim that verifier doesn't learn anything
+
+类比那种高难度投篮每个球都进的视频，对于soundness你必须到场地展示你的实力，但是zero-knowledge是允许剪辑的
+
+One step is zero-knowledge -> multiple step is zero-knowledge
+
+malicious verifier: can choose e arbitrarily instead of uniformly (can always choose same edge)
+
+prover has access to c (w), simulator has no access to c (w)
+
+Simulator: 任取一条edge给不同color，其他全部给红色，将这个graph进行commitment send to verifier
+
+![image-20240425235243361](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404252353075.png)
+
+for simulator world, simulator has access to verifier's code, verifier is a piece of code rather than a person
+
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404252337086.png" alt="image-20240425233754977" style="zoom:45%;" />
+
+电影镜头拍了156次才成功，但是观众只看到一次，认为他确实有接住东西的能力
+
+![image-20240426000136839](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404260001997.png)
+
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404260004891.png" alt="image-20240426000416792" style="zoom:45%;" />
+
+
+
+# LEC21 graph hamiltonicity, arbitrary NP-complete, Succinct Argument
+
+We will get soundness error 1/2 in one execution instead of 1/|E| in three coloring
+
+![image-20240502181048576](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202405021810709.png)
+
+1. rename vertices and keep edge consistent
+
+![image-20240502182419707](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202405021824794.png)
+
+2. commit to the permuted graph (no need cycle knowledge C)
+
+3. if b=0, prover send all the randomness, verifier check that he generate the permuted graph corectly
+
+   if b=1, send openings only for cycle edges, ri,j for every i,j such that... (not every i,j); check Hamiltonian cycle in permuted graph (can just open the vertice correspond to the cycle and check that all edge are 1)
+
+   [the C is only used in step3 b=1]
+
+   the black 1 is cycle edge, green 1 is non-cycle edge
+
+   ![image-20240502185253364](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202405021852496.png)
+
+![image-20240502182340824](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202405021833687.png)
+
+![image-20240502192501516](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202405021925658.png)
+
+
+
+# LEC23 (t,n) secret sharing, Shamir’s Secret Sharing, BLS signature
+
+![image-20240502193453081](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202405021934281.png)
+
+security is against unbounded attacker (info theory property, no need PPT A); attacker cannot distinguish between s & s'
+
+![image-20240502193511213](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202405021935289.png)
+
+![image-20240502194058477](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202405021940613.png)
+
+![image-20240502194935709](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202405021949878.png)
+
+![image-20240502195240162](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202405021952277.png)
+
+modify from (3,3) to (2,3) to (2,n)
+
+![image-20240502195335858](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202405021953952.png)
+
+![image-20240502195738656](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202405021957746.png)
+
+![image-20240502204010739](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202405022040858.png)
+
+![image-20240502200737707](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202405022007839.png)
+
+everyone store multiple string, not efficient
+
+***
+
+(t,n) -> Shamir’s Secret Sharing Scheme (efficient)
+
+theory review:
+
+$\mathbb{Z}_{q}$表示mod q; p'不表示导数，只是另一个poly
+
+![image-20240503011248438](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202405030112623.png)
+
+![image-20240503011812166](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202405030118382.png)
+
+Shamir’s Secret Sharing
+
+Typo <img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202405040148725.png" alt="image-20240504014828598" style="zoom:25%;" />
+
+![image-20240503013153626](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202405030131781.png)
+
+Practice Problem
+
+![image-20240503014504810](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202405030145980.png)
+
+apply (n-t+1,n) Shamir’s Secret Sharing to m
+
+![image-20240503014653537](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202405030146631.png)
+
+Split secret key and store at different location (goverment of a country can only corrupt one)
+
+[t digital signature also works, public key & signature size grow with n, not efficient]
+
+after secret key is distributed, we want it never reconstuct again -> never send partial secret key, instead send partial signature
+
+Partial signature, request t of n individual to sign the partial signature, and >=t partial signature can reconstruct digital signature
+
+![image-20240503014518091](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202405030145244.png)
+
+BLS Signature, bilinear map e
+
+(n,n): verify use the aggregated signature instead of check all of them one by one
+
+![image-20240503014537852](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202405030145940.png)
+
+(t,n)
+
+![image-20240503025802946](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202405030258109.png)
+
+![image-20240503022120214](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202405030221358.png)
+
+![image-20240503141922943](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202405031419055.png)
 
 
 
@@ -1490,3 +2099,66 @@ another valid cipher text encrypting m, ask decrypt oracle
 
 
 
+
+
+
+
+
+
+# Proof Workshop
+
+![image-20240325004135401](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403250041585.png)
+
+![image-20240325004219024](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403250042129.png)
+
+![image-20240325004355773](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403250043876.png)
+
+![image-20240325004440254](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403250044375.png)
+
+![image-20240325004532464](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403250045578.png)
+
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403250046253.png" alt="image-20240325004631145" style="zoom:67%;" />
+
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202403250046815.png" alt="image-20240325004649721" style="zoom:67%;" />
+
+
+
+
+
+
+
+# HW2
+
+negligible: can use limit to prove
+
+1.
+
+![image-20240208004001503](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202402080040614.png)
+
+2.
+
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202402080049943.png" alt="image-20240208004912912" style="zoom:50%;" />
+
+3.
+
+![image-20240213214039978](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202402132140041.png)
+
+File"Negligible-Functions"
+
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202402080048860.png" alt="image-20240208004813771" style="zoom:50%;" /> 
+
+ "∧" 表示逻辑 "与"
+
+
+
+# Polynomial Time Cryptanalytic Extraction of Neural Network Model
+
+only Relu
+
+worst plain text attack -> np hard, sign activation fn
+
+crypto 2020 carlini jagielski, poly query, exp time, no steal sign
+
+we do chosen text attack, poly time & query, sign & value; DNN is like block cipher
+
+![image-20240506175054776](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202405061750005.png)

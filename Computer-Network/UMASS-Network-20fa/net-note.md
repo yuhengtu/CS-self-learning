@@ -54,7 +54,7 @@ coaxial已经淘汰，fiber很贵
 
 ![image-20231209233311711](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312092333773.png)
 
-# 1.3 Network Core (Forwarding, routing; packet/curcuit switching; Internet)
+# 1.3 Network Core (Forwarding, routing; packet/circuit switching; Internet)
 
 ![image-20231211152932637](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312111529742.png)
 
@@ -86,6 +86,8 @@ queue memory 不够就会 lost
 
 ![image-20231211155604840](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312111556882.png)
 
+slam dunk 大满贯
+
 ![image-20231211160014913](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312111600961.png)
 
 
@@ -112,6 +114,8 @@ Content provider 常绕过  tier-1/ISP
 
 ![image-20231212235340789](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312122353860.png)
 
+nodal 节点
+
 ![image-20231212235354394](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312122353416.png)
 
 ![image-20231212235434388](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312122354409.png)
@@ -120,7 +124,7 @@ Content provider 常绕过  tier-1/ISP
 
 ![image-20231212235553897](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312122355918.png)
 
- 区分 trans 和 prop，类比
+ 区分 trans 和 prop，类比；caravan大篷车；toll收费
 
 ![image-20231213000431132](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312130004159.png)
 
@@ -160,11 +164,13 @@ layering 类比
 
 ![image-20231214101230483](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312141012834.png)
 
+ transparent透明
+
 ![image-20231214101437849](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312141014873.png)
 
-Transport layer, 不丢包TCP，可丢包UDP
+transport layer, 不丢包TCP，可丢包UDP，process to process transfer
 
-network layer: host to host transfer (end device), not reliable (best effort service); transport layer: process to process transfer
+network layer: host to host transfer (end device), not reliable (best effort service)
 
 ![image-20231214101923450](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312141019472.png)
 
@@ -182,11 +188,13 @@ encapulation封装：把高层的message，加上一些信息，变成低层的m
 
 ![image-20231214103306282](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312141033309.png)
 
+
+
 # 1.6 Networks under attack
 
 ![image-20231214104221545](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312141042573.png)
 
-bad guy 抓包
+抓包
 
 ![image-20231214104323560](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312141043586.png)
 
@@ -197,6 +205,8 @@ bad guy 抓包
 ![image-20231214104730542](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312141047568.png)
 
 ![image-20231214105004330](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312141050359.png)
+
+
 
 # 1.7 History of Networking
 
@@ -255,6 +265,8 @@ content layer
 防火墙，禁止访问某域名/检查包内不包含x
 
 ![image-20231214121500600](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312141215628.png)
+
+
 
 # 2.1 Application layer (client-server, P2P, sockets, transport tcp/udp)
 
@@ -622,11 +634,11 @@ many third-party cookies are invisible (1 pixel image)
 
 ![image-20231219213806683](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312192138724.png)
 
-logically communication意味着不考虑低层，抽象成一条直接连接的链路，可能lose/reorder/flip bits in message s
+logically communication意味着不考虑低层，抽象成一条直接连接的链路，可能lose/reorder/flip bits in message
 
 ![image-20231219214019827](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312192140865.png)
 
-host类比为房子，process类比为房子中的children，message来的时候，又房子根据地址分发给children；房子中的message分发是transport layer，network layer类比为post service，负责送信
+host类比为房子，process类比为房子中的children，message来的时候，房子根据地址分发给children；房子中的message分发是transport layer，network layer类比为post service，负责送信
 
 ![image-20231219214808395](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312192148431.png)
 
@@ -820,6 +832,8 @@ sender，如果n是最小的unACKed packet，被ACK后，window move forward；r
 
 
 
+
+
 # 4.1 Network layer
 
 之前app和trans layer都是network edge，之后进入network core
@@ -847,6 +861,8 @@ IP, best effort service
 ![image-20231224023950227](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312240239299.png)
 
 ![image-20231224024117596](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312241346508.png)
+
+
 
 # 4.2 Router: Input/output ports, switching fabrics, Network Neutrality
 
@@ -900,7 +916,7 @@ HOL: input port中很多红色pkt都想去红色output port，有些红色input 
 
 ![image-20231224150606533](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312241506593.png)
 
-假设non-bloacking switch，fabric NR，output port R -> buffering；drop/schedule policy，drop谁，先transmit谁 
+假设non-blocking switch，fabric NR，output port R -> buffering；drop/schedule policy，drop谁，先transmit谁 
 
 ![image-20231224151346016](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312241513081.png)
 
@@ -1116,6 +1132,8 @@ intelligence, complexity at network edge, 即The end-end argument
 
 ![image-20231226023808156](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312260238210.png)
 
+
+
 # 5.1 Network-layer control plane intro
 
 dijkstra(centralized)/bellman(distributed); OSPF: intra domain(domain内部); BGP: inter domain(domain之间)
@@ -1252,7 +1270,7 @@ chooses path *AS3,X*
 
 ![image-20240102191102000](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401021911062.png)
 
-policy; w是A的customer, y是C的customer, x是B和C的customer,; B不会把BAw这条路广播出去告诉C
+policy: w是A的customer, y是C的customer, x是B和C的customer; B不会把BAw这条路广播出去告诉C
 
 ![image-20240102192006580](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401021920642.png)
 
@@ -1270,33 +1288,142 @@ Hot potato routing 烫手山芋，赶紧快速滚出本network
 
 ![image-20240102194941676](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401021949755.png)
 
-# 5.5 SDN Control Plane
+# 5.5 SDN, OpenFlow
 
 
 
 # 5.6 ICMP: The Internet Control Message Protocol
 
-ICMP: error/ping/traceroute
+ICMP:  error/ping/traceroute; protocol num = 1用于demultiplex from ip above
+
+![image-20240116174300621](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401161743670.png)
+
+traceroute: TTL = n 指发送到距离n的router后drop datagram并发回ICMP; 若收到port unreachable则表明到达end of path
+
+![image-20240116174632667](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401161746710.png)
 
 
 
+# 5.7 Network Management & SNMP, configuration management: NETCONF/YANG
 
 
 
+# 6.1 Link Layer
+
+more powerful error detection; bluetooth 4G LTE cellular
+
+![image-20240116175723145](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401161757237.png)
+
+常用术语: 一切都是为nodes；没有layer3 router，只有layer2 switcher和physical layer
+
+![image-20240116180412781](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401161804829.png)
+
+有的检错，有的不检错
+
+![image-20240116180809119](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401161808171.png)![image-20240116180902350](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401161809426.png)
+
+link layer 48bit Mac addressing; network layer 32/128 bit ip addressing; wireless link有很多噪声和干扰，必须要检错
+
+![image-20240116181126594](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401161811643.png)
+
+ flow control 保证sender不把receiver冲烂；half-duplex半双工：只能同时走一个方向；full-duplex：可以同时双向
+
+![image-20240116181651314](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401161816370.png)
+
+![image-20240116182139442](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401161821510.png)
+
+![image-20240116182250109](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401161822182.png)
 
 
 
+# 6.2 Error-Detection: Parity checks, checksums, cyclic redundancy check (CRC)
+
+![image-20240117024505867](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401170245949.png)
+
+奇偶校验；new idea：检查到错误后纠正之，避免重传
+
+![image-20240117024528194](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401170245232.png)
+
+完全不用
+
+![image-20240117025216566](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401170252615.png)
+
+常用；D*2^r^，把D内容左移r位，后除G(R+1位)
+
+![image-20240117025653985](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401170256032.png)
+
+![image-20240117025836303](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401170258368.png)
 
 
 
+# 6.3 Multiple Access Links & Protocols, Random Access, Taking Turns, DOCSIS
 
+Link layer协议很多
 
+![image-20240117030624059](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401170306185.png)
 
+![image-20240117162103067](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401171621235.png)
 
+collision 冲突
 
+![image-20240117162158873](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401171621972.png)
 
+![image-20240117162352384](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401171623495.png)
 
+老师让学生举手回答，polling，take turns
 
+![image-20240117162941027](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401171629138.png)
 
-# 5.7 Network Management and SNMP, NETCONF/YANG
+1. Channel partitioning 
 
+![image-20240117163256483](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401171632597.png)
+
+![image-20240117164004114](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401171640267.png)
+
+2. Random access
+
+![image-20240117164434644](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401171644779.png)
+
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401171645884.png" alt="image-20240117164539778" style="zoom:25%;" />
+
+![image-20240117164808850](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401171648964.png)
+
+![image-20240117164936126](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401171649232.png)
+
+![image-20240117165053702](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401171650812.png)
+
+如果是pure aloha(不分time slot)，efficiency最高0.37/2
+
+![image-20240117165420043](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401171654111.png)
+
+ALOHA: just speak; CSMA: listen before speak
+
+![image-20240117165435448](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401171654547.png)
+
+但仍会发生冲突
+
+![image-20240117165823405](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401171658514.png)
+
+abort终止
+
+![image-20240117165905431](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401171659538.png)
+
+指数退避
+
+![image-20240117170204964](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401171702069.png)
+
+![image-20240117170315733](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401171703850.png)
+
+3. Taking turns (bluetooth) polling & token passing
+
+![image-20240117171257833](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401171712028.png)
+
+![image-20240117171714018](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401171717124.png)
+
+![image-20240117171724062](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401171717165.png)
+
+example
+
+![image-20240117172000365](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401171720468.png)
+
+![image-20240117172457551](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401171724667.png)

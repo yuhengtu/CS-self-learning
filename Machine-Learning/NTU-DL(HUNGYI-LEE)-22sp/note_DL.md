@@ -10,7 +10,7 @@ y是机率，用cross entropy
 
 error surface，暖色系loss大，冷色系loss小
 
-error surface的维度由网络参数决定，有几个w，b就是几维
+error surface维度由网络参数决定，有几个w，b就是几维
 
 local minimum不是梯度下降的主要痛点
 
@@ -24,7 +24,9 @@ piecewise linear函数（线段组成）都可以由多个蓝色的折线函数�
 
 <img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202310132022359.png" alt="image-20231013202228317" style="zoom:25%;" />
 
-蓝色的折线函数即是sigmoid<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202310132024876.png" alt="image-20231013202419827" style="zoom:25%;" /><img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202310132029475.png" alt="image-20231013202941410" style="zoom:25%;" /><img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202310132026019.png" alt="image-20231013202608982" style="zoom:25%;" />
+蓝色的折线函数即是sigmoid
+
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202310132024876.png" alt="image-20231013202419827" style="zoom:25%;" /><img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202310132029475.png" alt="image-20231013202941410" style="zoom:25%;" /><img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202310132026019.png" alt="image-20231013202608982" style="zoom:25%;" />
 
 就是mlp
 
@@ -101,6 +103,8 @@ back propagation 利用chain rule高效计算梯度
 ![image-20231016113910198](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202310161139236.png)
 
 以上推导见手写笔记“generalization analysis”
+
+![image-20231212200006223](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202312122000269.png)
 
  由于累加 P往往大于1，所以没什么用 ，上界往往比实际大得多
 
@@ -510,24 +514,30 @@ class MyDataset(Dataset):
 
 torch.utils.data.Dataset 读入；torch.utils.data.DataLoader 打包
 
-训练shuffle 测试不 表示打乱
+训练shuffle 测试不
 
 ```python
 dataset = MyDataset(file) 
 dataloader = DataLoader(dataset, batch_size=5, shuffle=False)  
 ```
 
-![image-20230902225606273](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/image-20230902225606273.png)
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/image-20230902225606273.png" alt="image-20230902225606273" style="zoom:67%;" />
 
 ![image-20231013213724439](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202310132137490.png)
 
-shape（）![image-20230902225659204](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/image-20230902225659204.png)
+shape（）
+
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/image-20230902225659204.png" alt="image-20230902225659204" style="zoom:67%;" />
 
 transpose（0，1）转置，0维和1维互换
 
-squeeze，unsqueeze，reshape![image-20230902231512483](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/image-20230902231512483.png)![image-20230902231604812](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/image-20230902231604812.png)
+squeeze，unsqueeze，reshape
 
-cat <img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/image-20230902231709374.png" style="zoom:67%;" />
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/image-20230902231512483.png" alt="image-20230902231512483" style="zoom:67%;" /><img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/image-20230902231604812.png" alt="image-20230902231604812" style="zoom:67%;" />
+
+cat
+
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/image-20230902231709374.png" style="zoom:67%;" />
 
 不同datatype会报错
 
@@ -780,49 +790,61 @@ HW5，经过授权才能submit
 
 # CNN
 
-一般都假设影像大小一致，不一致的需要rescale再输入
-
-决定了classifier可分类的个数![image-20230823174310111](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/image-20230823174310111.png)
-
-一张图片是RGB三个向量，每个100*100
+一般假设image大小一致，不一致的需要rescale再输入，100 * 100 * 3
 
 判断影像通常由小块特征得出结果（眼，嘴，爪子）
 
-引入receptive field，1个神经元只管3*3的RGB向量；receptive field可重叠，一个receptive field使用两个神经元，或大小不同，或只考虑某些channel（RGB之一），可以是其他形状
+receptive field 感受野 (红色立方体) -> 1个神经元只管3*3的RGB向量(共3 * 3 * 3)
+
+[receptive field可重叠，可以一个receptive field使用两个神经元，可大小不同，可只考虑某些channel（RGB之一），可以是其他形状]
 
 ![image-20230823175242462](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/image-20230823175242462.png)
 
-经典安排方式都是如下图，一个receptive field常对应多个神经元（64）；stride步长，超出范围空白处补值padding
+经典安排方式如下图，一个receptive field常对应多个神经元（如64，即64个filter）；stride步长，超出范围空白处补值padding
 
-![image-20230823175919798](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/image-20230823175919798.png)
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/image-20230823175919798.png" alt="image-20230823175919798" style="zoom:67%;" />
 
-鸟嘴可以在不同位置，那么每一块感受野都要配备一个鸟嘴识别神经元会重复，因此使用权重共享，常用的是64个神经元都共用参数，一组神经元称为filter
+鸟嘴可以在不同位置，那么每个感受野都要配备一个鸟嘴识别神经元 -> 权重共享
+
+同一个神经元对于不同的感受野共用参数，每个神经元是一个filter，扫过不同的感受野
 
 ![image-20230823190825446](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/image-20230823190825446.png)![image-20230823190944558](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/image-20230823190944558.png)
 
-感受野+参数共享=convolutional layer，模型bias大（bias小容易overfit），bias大可能不适合影像外其他任务，需要思考是否由以上两种特性
+-> first hidden layer: 3 * 3 * 64channel
+
+![](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202405051757148.png)
+
+感受野 + 参数共享 = convolutional layer
+
+[模型bias大（bias小容易overfit），bias大可能不适合影像外其他任务，需要思考是否有以上上两种特性]
 
 另一个CNN讲解方法
 
 ![image-20230823191602343](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/image-20230823191602343.png)
 
-filter里的数值就是权重，是通过梯度下降找出来的。找出来之后他可以用来detect图片某一块的pattern；如下filter侦测对角线为1的区域（得到值最大）。一个filter得到一组4*4数字，称为1张feature map64个filter得到64张feature map
+filter里的数值即weight，通过梯度下降得到，得到后可用来detect图片某一块pattern；如下filter侦测对角线为1的区域（得到值最大）
+
+6 * 6 image -> filter -> 4*4 feature map, 64个filter -> 64 feature map
 
 ![image-20230823192027963](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/image-20230823192027963.png)
 
-第一层layer64个filter得到64张feature map，可以看作新的4*4图片，有64个channel；第二层layer就必须是深度为64的filter，深度必须与channel一致
+第一层layer64个filter得到64张feature map，可以看作新的4*4图片，有64个channel
+
+第二层layer就必须是深度为64的filter，深度必须与channel一致
 
 ![image-20230823192716552](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/image-20230823192716552.png)
 
-3*3的filter在第二层已经涉猎了5*5的原图范围，因此可以侦测到大范围的pattern
+第二层3 * 3的filter已经涉猎了5 * 5的原图范围，因此可以侦测到大范围的pattern
 
 <img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/image-20230823192902363.png" alt="image-20230823192902363" style="zoom: 50%;" />
 
-filter是有bias的，不要忽略；一个filter扫过一张图片就是参数共享，就是卷积
+filter是有bias (wx+b的b) 的，不要忽略；一个filter扫过一张图片就是参数共享，就是卷积
 
 ![image-20230823193125205](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/image-20230823193125205.png)
 
-简化3：pooling池化，图片压缩不影响图片识别；这是一个固定过程，不随学习改变，类似激活函数，以max pooling为例，就是2*2的区域中留下最大的数字以压缩图片，还有mean pooling等；通常2次conv1次pooling这样进行；为了侦测细小特征，近年常不使用pooling
+简化3：pooling池化，图片压缩不影响图片识别；这是一个固定过程，不随学习改变，类似激活函数，以max pooling为例，就是2*2的区域中留下最大的数字以压缩图片，还有mean pooling等；通常2次conv1次pooling循环进行
+
+[为了侦测细小特征，近年常不使用pooling]
 
 最终把conv和pool层的输出flatten（拉直成向量），送到传统mlp
 
@@ -862,17 +884,19 @@ spatial transformer layer（NN） 用来对input image/feature map 做旋转缩�
 
 由此，对input做旋转缩放平移，CNN看见的input是不动的；transformer放大并且 截出了图片中主体的部分
 
-![image-20231021224115746](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202310212241786.png)![image-20231021224058461](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202310212240512.png)
+![image-20231021224115746](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202310212241786.png)
 
+![image-20231021224058461](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202310212240512.png)
 
+resnet
 
-
+![image-20240418005133508](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404180051660.png)
 
 
 
 # Self-attention
 
-每次输入sequence长度不一样，word embedembedding给每个词汇一个向量，按照语义分区
+每次输入sequence长度不一样 -> word embedembedding给每个词汇一个向量，按照语义分区
 
 ![image-20231023210410292](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202310240957019.png)
 
@@ -880,7 +904,7 @@ spatial transformer layer（NN） 用来对input image/feature map 做旋转缩�
 
 ![image-20231023212141421](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202310240957657.png)
 
-图的每个结点是一个向量
+Graph的每个vertex是一个向量
 
 case1：输入几个向量，输出几个label，POStagging 词性标注
 
@@ -890,11 +914,11 @@ case2：输出1个label
 
 case3：seq2seq语音识别为文字，翻译 
 
-
+***
 
 case1：输入几个向量，输出几个label
 
-saw有时是名词有时是动词，函数只能映射到一个输出，解决方法：takein前后相邻内容
+saw有时是名词有时是动词，函数只能映射到一个输出，解决方法：take in前后相邻内容
 
 ![image-20231023213311256](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202310240958340.png)
 
@@ -904,7 +928,7 @@ saw有时是名词有时是动词，函数只能映射到一个输出，解决�
 
 ![image-20231023213827441](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202310240958938.png)
 
-如何计算两个vector间权重？常用dot- product法（transformer所用）
+如何计算两个vector间权重？常用dot-product法（transformer所用）
 
 ![image-20231024100406594](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202310241004656.png)
 
@@ -926,13 +950,17 @@ saw有时是名词有时是动词，函数只能映射到一个输出，解决�
 
 ![image-20231024103522050](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202310241035104.png)
 
+***
+
 目前self- attention没考虑到位置的资讯，positional vector 上标i表示位置序号，position encoding待研究，也可以根据资料学出来，在原始论文attention is all you need中通过sincos function手动产生positional vector，就为了不同位置不同feature
 
-<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202310241039089.png" alt="image-20231024103959048" style="zoom:25%;" />![image-20231024104208999](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202310241042041.png)
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202310241039089.png" alt="image-20231024103959048" style="zoom:25%;" />
 
-transformer Bert（NLP）都用了self- attention
+![image-20231024104208999](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202310241042041.png)
 
-语音识别中因为向量太多，运算量太大，使用truncated self- attention，只看一个小的范围，不看一整句话
+transformer Bert（NLP）都用了self-attention
+
+语音识别中因为向量太多，运算量太大，使用truncated self-attention，只看一个小的范围，不看一整句话
 
 把图片看作vector set 三维向量，W*H个
 
@@ -952,15 +980,15 @@ RNN已经基本被self-attention 淘汰，RNN只考虑了左边已输入的部�
 
 ![image-20231024110415622](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202310241104686.png)
 
-RNN和self- attention的关系![image-20231024110313861](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202310241103891.png)
+RNN和self- attention的关系
 
-图self- attention，仅计算相连的node的attention，其他置0，就是GNN的一种
+![image-20231024110313861](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202310241103891.png)
 
-self- attention有很多变形，主要问题是计算量大；横轴speed，纵轴performance
+graph self-attention，仅计算相连的node的attention，其他置0，就是GNN的一种
+
+self-attention有很多变形，主要问题是计算量大；横轴speed，纵轴performance
 
 ![image-20231024111451119](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202310241114184.png)
-
-
 
 
 
@@ -1176,13 +1204,17 @@ Adjacency matrix 邻接矩阵
 
 
 
+
+
+
+
 # Transformer
 
 seq2seq，关键在于机器自己决定输出长度 
 
 speech translation，没有文字的语言
 
-![image-20231115171530265](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202311151715361.png)
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202311151715361.png" alt="image-20231115171530265" style="zoom:25%;" />
 
 语音合成：输入中文文字，输出台语声音 
 
@@ -1190,13 +1222,15 @@ chatbot
 
 NLP的绝大多数课题都可以理解为 question answering；但是客制化专用模型往往比seq2seq效果好
 
-![image-20231115172334054](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202311151723142.png)
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202311151723142.png" alt="image-20231115172334054" style="zoom:25%;" />
 
 树状结构也可以表示成seq，1412.7449 Grammar as a Foreign Language
 
 <img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202311151727609.png" alt="image-20231115172738554" style="zoom:25%;" />
 
 <img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202311151732499.png" alt="image-20231115173206444" style="zoom:15%;" /><img src="../Library/Application Support/typora-user-images/image-20231115173225825.png" alt="image-20231115173225825" style="zoom:15%;" />
+
+***
 
 seq2seq模型架构
 
@@ -1212,7 +1246,7 @@ transformer中用的比上图更复杂一点，加入了norm和residual
 
 ![image-20231115173929432](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202311151739518.png)
 
-光用self- attention没有位置信息，再加入positional encoding
+光用self-attention没有位置信息，再加入positional encoding
 
 ![image-20231115174152736](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202311151741796.png)
 
@@ -1220,7 +1254,9 @@ transformer中用的比上图更复杂一点，加入了norm和residual
 
 ![image-20231115174252539](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202311151742607.png)
 
-最常用autoregressive decoder；读入decoder输出的过程先省略，之后再讲；以语音识别为例
+***
+
+最常用autoregressive decoder；读入encoder输出的过程先省略，之后再讲；以语音识别为例
 
 BEGIN -> begin of sentence BOS，one-hot；size：vocabulary size，一共有多少个汉字字符/词汇/字母/subword，每个字符对应一个概率数值；可能一步错步步错；end作为句子的结束，作业中与BEGIN使用了同一个符号
 
@@ -1234,13 +1270,23 @@ BEGIN -> begin of sentence BOS，one-hot；size：vocabulary size，一共有多
 
 上图中的masked指只考虑左边的
 
-<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202311152023664.png" alt="image-20231115202342622" style="zoom:15%;" /><img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202311152025174.png" alt="image-20231115202517080" style="zoom:20%;" />
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202311152023664.png" alt="image-20231115202342622" style="zoom:15%;" />
+
+原本self attention的b2
+
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202405210209548.png" style="zoom:20%;" />
+
+masked self attention的b2
+
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202311152025174.png" alt="image-20231115202517080" style="zoom:20%;" />
 
 NAT，non-autoregressive model，一次性产生整个句子；决定句子长度，learn一个classifier输出句子长度，或给300个begin，等他输出end（句子上限300） ；语音合成里常用NAT， 让系统讲快一点，把classifier的输出➗2，慢✖️2
 
 ![image-20231115203921249](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202311152039293.png)
 
-接下来讲decoder输出如何被encoder读入 ；蓝圈是k，v，绿圈是q
+***
+
+接下来讲encoder输出如何被decoder读入；蓝圈是k，v，绿圈是q
 
 ![image-20231115204057895](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202311152040956.png)
 
@@ -1287,8 +1333,6 @@ Beam search有时候有用，有时候没有用；如果任务答案非常明确
 exposure bias，训练时看gt，推理时看自己上一个时刻的输出，可能一步错步步错 ；解决方法：训练时给机器看一些错误的输入，即schedule sampling；schedule sampling在transformer出现前就有，会伤害到transformer的平行化能力，后来有了专用于transformer的schedule sampling
 
 <img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202311152136520.png" alt="image-20231115213623466" style="zoom:25%;" />![image-20231115213709873](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202311152137925.png)
-
-
 
 
 
@@ -1414,7 +1458,7 @@ conditional VAE，指定数字的style
 
 
 
-# Self-Supervised Learning
+# SSL
 
 ![image-20231125142626070](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202311251426179.png)
 
@@ -1426,7 +1470,7 @@ SSL属于unsupervised
 
 BERT，随机决定要盖住哪些字，随机决定要用两种遮盖方法的哪一种（遮黑/用另一个随机token替换）
 
-![image-20231125144316559](../Library/Application Support/typora-user-images/image-20231125144316559.png)
+<img src="../Library/Application Support/typora-user-images/image-20231125144316559.png" alt="image-20231125144316559" style="zoom:25%;" />
 
 
 
@@ -1496,6 +1540,148 @@ encoder也可以用作失真压缩![image-20231007111333968](https://cdn.jsdeliv
 
 
 
+# Adversarial Attack
+
+应付来自人类的恶意
+
+![image-20240410175527207](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404101755996.png)
+
+non-targeted: 网络输出任何东西除了猫都算攻击成功；targeted: 输出海星算攻击成功
+
+![image-20240410175910643](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404101759702.png)
+
+加肉眼可见的噪声网络可以输出错的不离谱的结果
+
+![image-20240410180347396](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404101803453.png)
+
+0.64是post prob，加的噪声小到肉眼看不出来，反而输出错的离谱的结果
+
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404101801577.png" alt="image-20240410180135485" style="zoom:25%;" />
+
+1. white-box attack 知道模型参数
+
+L是$y$和$\widehat{\boldsymbol{y}}$的差距(cross-entropy)取负号，差距越大越好
+
+![image-20240410180913297](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404101809347.png)
+
+L-∞适合近人类肉眼，4-pixel example: 上图四个颜色各变化一小点，下图仅右下角绿色变化了一大点，两者L2-norm一样
+
+![image-20240410181258061](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404101812115.png)
+
+d(x^0^, x^t^)；fix指拉回到正方形边缘
+
+![image-20240410194158948](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404101941091.png)
+
+FGSM 只update一次；learning rate $\eta = \epsilon$，二维情况下必然落到正方形四个顶点之一
+
+![image-20240410194553785](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404101945931.png)
+
+上述方法iterate
+
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404101948764.png" alt="image-20240410194815683" style="zoom:25%;" />
+
+2. black-box attack 不知道参数
+
+用同样的data自己train一个network，攻击自己的network2
+
+如果不知道training data，对于network输入data输出predict，形成paired data用来训练proxy network
+
+![image-20240410195143943](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404101951001.png)
+
+black-box attack non-targeted成功率很高 (表格1的对角线是white-box attack)；targeted成功率不高
+
+表二第一行: -Resnet152表示使用对其他四个网络都攻击成功的data来攻击Resnet152 (非对角线是white-box attack)
+
+![image-20240410195726191](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404101957250.png)
+
+一个可能的解释：深蓝色是小丑鱼类别；图中横轴是攻击成功的方向，纵轴是攻击失败的随机方向；可见各种network攻击成功的方向都很类似；攻击容易成功，问题来自于data而不是model (linear network/SVM也很容易攻击成功)
+
+![image-20240410200312867](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404102003921.png)
+
+attack越小越好，可以小到1pixel的程度
+
+![t](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404102006922.png)
+
+universal attack 不用针对图片客制化
+
+![image-20240410200712559](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404102007628.png)
+
+detect 合成声音的network也很容易被攻击；NLP结尾加上红色语段，机器回答相同
+
+![image-20240410201038652](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404102010732.png)
+
+真实世界中的attack
+
+从各个角度看某个带上神奇眼镜的人，都可以欺骗人脸识别系统
+
+真实世界可以多角度观察物体，可能只有一个角度能骗过network其他不会；微小的变化摄像头抓不到 (解析度不够)；生产眼镜时避免真实世界颜色和电脑上颜色的区别
+
+![image-20240410201656508](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404102016590.png)
+
+自动驾驶路牌
+
+![image-20240410201753696](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404102017769.png)
+
+特斯拉自动驾驶看见被攻击的35会当成85然后加速
+
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404102018372.png" alt="image-20240410201812287" style="zoom:25%;" />
+
+输入4方块噪声图，模型输出tiger shark；输入10方块噪声图，模型输出ostrich
+
+![image-20240410211701040](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404102117194.png)
+
+以上都是测试阶段攻击 (加噪声等骗过模型)
+
+backdoor (训练阶段攻击)
+
+training data中加入看起来正常的图片正常label但是adversarial的data (有人上传恶意图片到人脸识别资料集)
+
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404102131229.png" alt="image-20240410213122174" style="zoom:25%;" />
+
+
+
+防御: 被动or主动
+
+被动防御: 加一个filter (如smoothing就有很好的效果)
+
+![image-20240410213326785](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404102133840.png)
+
+smoothing可能有副作用
+
+![image-20240410213437632](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404102134680.png)
+
+其他方法：压缩再解压缩；让generator产生一张和输入尽量相似的图片 (会删除恶意噪声)
+
+![image-20240410213945128](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404102139213.png)
+
+被动防御的弱点：一旦别人知道你用smoothing防御，别人也先用smoothing就仍旧可以产生attack signal
+
+因此可以给被动防御加上随机性 (随机resize，再贴在随机灰色幕布上)
+
+问题：别人可能知道你的随机防御方法并且找到universal attack signal 
+
+![image-20240410214308449](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404102143507.png)
+
+主动防御: adversarial training 训练一个不容易被攻破的模型
+
+训练完成后攻击自己，针对攻击data再进行训练；typo: $\hat{y}^{y}$ -> $\hat{y}^{N}$，类似于data augmentation (就算没人攻击也可以使模型robust避免overfit)；问题：computing expensive (adversarial training for free可以解决); adversarial training过程中未使用新算法，attacker可能使用新算法攻击
+
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202404102151027.png" alt="image-20240410215145949" style="zoom:60%;" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # Federated Learning
@@ -1539,6 +1725,8 @@ synchronous + message passing + client-server
 谷歌mapreduce未开源（bulk syncharonous 每一轮全部算完才进行下一轮），两个模仿者中spark更好(另一个是hadoop)。适合数据处理，用来ml并不高效
 
 ![image-20230821230855931](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202311130053409.png)
+
+![image-20240627133941416](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406271339526.png)
 
 broadcast（server传出），map（并行计算），reduce（回传server）；server分三种：sum（求和），mean（平均），collect（收集，得到很多矩阵）
 
@@ -1820,6 +2008,258 @@ HHL对矩阵condition number有限制，同样需要amplitude encoding，有ampl
 ![image-20231111235133917](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202311112351993.png)
 
 听不懂了
+
+
+
+# LLM
+
+gpt实则两三个token组成一个中文文字
+
+llm在做文字接龙
+
+![image-20240605024926314](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406050249473.png)
+
+![image-20240605164241940](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406051642076.png)
+
+![image-20240605160746067](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406051607181.png)
+
+***
+
+第一阶段 pre-train：SSL (masked) 学习网上爬下来的乱七八糟资料
+
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406050252525.png" alt="image-20240605025241463" style="zoom:25%;" />
+
+![image-20240605150921605](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406051509657.png)
+
+GPT3很难控制，prompt格式很重要，你问他问题他只会乱接龙；没有教他回答问题，只是教他文字接龙
+
+****
+
+第二阶段：人类整理问题+答案，supervised learning
+
+人类标注资料有限，因此关键是使用第一阶段的参数作为初始参数
+
+![image-20240605152440543](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406051524662.png)
+
+保持第一阶段的参数固定，新加一些参数xyz以供优化，更快
+
+![image-20240605153142815](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406051531955.png)
+
+![image-20240605153822904](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406051538065.png)
+
+![image-20240605154359001](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406051543149.png)
+
+![image-20240605154558096](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406051545170.png)
+
+finetune这一步不需要大量资料，几万笔即可，重点是质量高，less is more
+
+openai知道真实用户会问什么问题
+
+![image-20240605155942184](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406051559306.png)
+
+GPT逆向工程
+
+![image-20240605160115152](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406051601239.png)
+
+但是没有pretrain参数 -> llama开源了
+
+![image-20240605160402929](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406051604065.png)
+
+![image-20240605160517493](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406051605564.png)
+
+***
+
+第三阶段：RLHF (PPO)
+
+人类比较轻松，只需要判断两个模型输出哪个比较好即可，人类回馈有偏见
+
+训练一个reward model来模拟人类的判断
+
+横轴是向reward model学习的次数，实线是人类的喜好程度，虚线是reward model的喜好程度
+
+![image-20240605162707562](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406051627680.png)
+
+![image-20240605162823411](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406051628494.png)
+
+![image-20240605163547234](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406051635381.png)
+
+RLAIF，可以让模型自己对自己做RLAIF，模型可能没能力输出好答案，但有能力判断答案好坏
+
+![image-20240605163751663](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406051637764.png)
+
+训练一个safety reward model，一个helpfulness reward model
+
+![image-20240605163903897](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406051639972.png)
+
+***
+
+Speculative Decoding: 加快语言模型输出时间
+
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406051702260.png" alt="image-20240605170221139" style="zoom:25%;" />
+
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406051702752.png" alt="image-20240605170246682" style="zoom:25%;" />
+
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406051703517.png" alt="image-20240605170323403" style="zoom:25%;" />
+
+![image-20240605170402333](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406051704458.png)
+
+
+
+# LoRA & QLoRA
+
+![image-20240613165149324](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406131651475.png)
+
+r = 1-64
+
+alpha: 0-1, amount of change added to original model weights
+
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406131656388.png" alt="image-20240613165654285" style="zoom:25%;" />
+
+![image-20240613172819064](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406131728206.png)
+
+
+
+# LLM safety
+
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406051706556.png" alt="image-20240605170615421" style="zoom:25%;" />
+
+
+
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406061606890.png" alt="image-20240606160643692" style="zoom:25%;" />
+
+gemini有谷歌查询验证功能
+
+![image-20240606161517151](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406061615237.png)
+
+***
+
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406061614062.png" alt="image-20240606161452911" style="zoom:25%;" />
+
+![image-20240606161715500](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406061617641.png)
+
+让LLM排序一模一样的履历，仅名字不同，排一千次
+
+![image-20240606162010757](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406061620864.png)
+
+![image-20240606162254276](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406061622427.png)
+
+![image-20240606162403294](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406061624371.png)
+
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406061625733.png" alt="image-20240606162549604" style="zoom:25%;" />
+
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406061629166.png" alt="image-20240606162956023" style="zoom:25%;" />
+
+***
+
+目前只能训练出比较准确的针对单一语言模型的分类器
+
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406061632854.png" alt="image-20240606163221729" style="zoom:25%;" />
+
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406061634296.png" alt="image-20240606163441221" style="zoom:25%;" />
+
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406061635472.png" alt="image-20240606163523397" style="zoom:25%;" />
+
+如果只是润稿的话检测器不会输出这么高的概率
+
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406061636021.png" style="zoom:25%;" />
+
+水印
+
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406061638340.png" alt="image-20240606163855267" style="zoom:25%;" />
+
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406061639218.png" alt="image-20240606163916143" style="zoom:25%;" />
+
+***
+
+诈骗LLM prompt hacking
+
+![image-20240606164424934](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406061644063.png)
+
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406061645831.png" alt="image-20240606164514744" style="zoom:25%;" />
+
+对gpt4o使用注音符号
+
+![image-20240606164648411](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406061646488.png)
+
+![image-20240606164732170](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406061647253.png)
+
+![image-20240606164817120](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406061648198.png)
+
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406061650900.png" alt="image-20240606165028744" style="zoom:25%;" />
+
+重复单词，突然吐出个人信息，10%准确率
+
+![image-20240606165149186](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406061651265.png)
+
+Prompt Injection
+
+![image-20240606165603128](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406061656211.png)
+
+![image-20240606165528407](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406061655504.png)
+
+
+
+# LLM Audio
+
+![image-20240625235013928](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406252350141.png)
+
+![image-20240625235030575](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406252350635.png)
+
+声音16kHz，一秒采样16000次，接龙太慢；使用speech unit
+
+![image-20240625235527130](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406252355211.png)
+
+![image-20240625235635287](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406252356362.png)
+
+文字 + speech unit
+
+![image-20240625235842860](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406252358924.png)
+
+2个人同时跟model说话
+
+![image-20240626000015930](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406260000077.png)
+
+棒读指说话非常平淡，模型大了会学出语气
+
+![image-20240626000316442](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406260003567.png)
+
+全部用语音pretrain资料太少
+
+![image-20240626000543953](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406260005071.png)
+
+教已经pretrain的语言模型学一门新的语言
+
+![image-20240626001243522](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406260012641.png)
+
+![image-20240626001423722](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406260014796.png)
+
+模型讲话都是同一个人的声音；finetune往往不需要太多资料，只要少量高质量
+
+也可以用语音转换技术转换成同一个人的声音
+
+![image-20240626001832834](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406260018898.png)
+
+语音模型相比语言模型，需要猜什么时候开始接话；人可能会打断语音模型，也有可以在和语音模型合唱
+
+第二个频道记录模型自己说过什么，模型输入两个频道的内容，接龙第二个频道的内容
+
+![image-20240626002429395](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406260024508.png)
+
+![image-20240626002502628](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406260025707.png)
+
+![image-20240626002702265](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406260027342.png)
+
+
+
+https://www.youtube.com/watch?v=2vu6u5CrMYQ
+
+llama vocabulary size 32K
+
+audio token vocabulary 1024
+
+![image-20240630153652966](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406301536155.png)
+
+
 
 
 

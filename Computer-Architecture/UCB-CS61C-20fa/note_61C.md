@@ -1,8 +1,22 @@
 #   LEC1 INTRO
 
-![image-20231101214804594](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202311012148651.png)
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406221641832.png" alt="image-20240622164100654" style="zoom: 67%;" />
 
-<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202311012150423.png" alt="image-20231101215009394" style="zoom:150%;" />
+![image-20240622164250421](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406221642470.png)
+
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202311012148651.png" alt="image-20231101214804594" style="zoom: 50%;" />
+
+![image-20240622164348537](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406221643575.png)
+
+![image-20240622164447829](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406221644872.png)
+
+![image-20240622164532326](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406221645368.png)
+
+![image-20240622164553152](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406221645189.png)
+
+![image-20240622164615927](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406221646967.png)
+
+![image-20240622164636571](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406221646610.png)
 
 Amdahl's Law 并行的能力是有限的。假设一个程序由串行部分和并行部分组成，串行部分无法并行化，而并行部分可以并行执行。如果你优化了并行部分，使其运行更快，那么整个程序的性能提升将受到串行部分的限制。
 
@@ -10,7 +24,13 @@ Latency：完成一个任务要多少时间
 
 Throughput：一定时间内能完成多少任务
 
+![image-20240622164831345](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406221648400.png)
+
 redundancy：冗余计算，计算多个结果后vote
+
+![image-20240622164915422](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406221649459.png)
+
+![image-20240622164954539](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406221649612.png)
 
 摩尔定律放缓，电池限制主频；现在是CA的时代，各种专用的架构，TPU
 
@@ -64,7 +84,11 @@ bias encoding：现有值域0-31的信号（unsigned），拉低到中心位置�
 
 硬件存储和传输的单位都是*1000，其他一切（cache memory）都 *1024
 
-![image-20231106002410743](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202311060024776.png)
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202311060024776.png" alt="image-20231106002410743" style="zoom:67%;" />
+
+
+
+
 
 # LEC3 C
 
@@ -215,8 +239,6 @@ q指针仍未移动，用指针的指针，称为handle：**h ；一般不会超
 `map`函数：用于对可迭代对象（如列表、元组等）中的每个元素应用一个特定的函数，返回一个新的可迭代对象，其中包含了经过该函数处理的每个元素的结果。
 
 ![image-20231106194255363](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202311061942404.png)
-
-
 
 
 
@@ -378,7 +400,7 @@ IEEE754，大多数电脑采用的；2个0
 
 ![image-20231115224107407](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202311161622648.png)
 
-为了普通CPU也能比较浮点数，要求负的比正的小，因此采用bias notation，-128是0，+127是255，bias = 127 = (2^(N-1))-1
+为了普通CPU也能比较浮点数，要求负的比正的小，因此采用bias notation，-127是0，+128是255，bias = 127 = (2^(N-1))-1
 
 ![image-20231115225413979](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202311152254039.png)
 
@@ -984,6 +1006,242 @@ sign extend问题 ，要lui 21而不是20
 
 
 
+# LEC14 Synchronous Digital Systems (SDS)
+
+clock: GHz
+
+![image-20240622170213313](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406221702485.png)
+
+switch assert/close
+
+![image-20240622173946329](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406221739483.png)
+
+![image-20240622174118957](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406221741016.png)
+
+Transistor (amplifier/switch, used as switch in info system)
+
+![image-20240622174546913](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406221745075.png)
+
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406221754601.png" alt="image-20240622175424449" style="zoom:25%;" />
+
+![image-20240622192515795](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406221925983.png)
+
+![image-20240623015930388](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406230159616.png)
+
+NOT
+
+![image-20240623020525447](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406230205562.png)
+
+NAND
+
+![image-20240623020804247](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202406230208364.png)
+
+
+
+Signals and Waveforms
+
+clock
+
+![image-20241020212443004](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410202124027.png)
+
+X0: lab (least significant bit), x3: msg (most significant bit), 头歪向左看
+
+![image-20241020212521037](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410202125144.png)
+
+Circuit Delay
+
+![image-20241020212639150](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410202126211.png)
+
+Combinational Logic/State Elements
+
+![image-20241020212704049](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410202127142.png)
+
+when load goes high, register update the memorized value
+
+![image-20241020213016419](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410202130479.png)
+
+![image-20241020213258054](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410202132117.png)
+
+
+
+# LEC15
+
+![image-20241020213812341](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410202138459.png)
+
+suppose we do not have state elements, we want to build an accumulator
+
+![image-20241020215614570](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410202156698.png)
+
+![image-20241020215645759](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410202156844.png)
+
+Reset = 1 -> register value = 0
+
+![image-20241020215935606](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410202159728.png)
+
+
+
+Register details inside: Flip-flop
+
+A n-bit register is n 1-bit flip-flop (parallel)
+
+![image-20241020220433719](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410202204847.png)
+
+Trigger -> load
+
+![image-20241020220415786](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410202204969.png)
+
+![image-20241020220757185](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410202207283.png)
+
+
+
+add delay & clock-to-q delay; reset has higher priority than load
+
+![image-20241020221916388](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410202219480.png)
+
+first clock reset
+
+Si那一行，X0 和 X0+X1之间的阴影部分是错误的add result, add 是CL, 即时的
+
+between setup time and hold time, value should be right
+
+![image-20241020222117795](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410202221901.png)
+
+setup time = stable time before next rising edge
+
+![image-20241020222746288](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410202227539.png)
+
+![image-20241020224501141](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410202245293.png)
+
+![image-20241020224904204](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410202249304.png)
+
+![image-20241020225115565](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410202251680.png)
+
+
+
+Finite State Machines (FSM)
+
+![image-20241025234148241](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410252341561.png)
+
+input/output; double circle means initial state  
+
+![image-20241025234520558](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410252345611.png)
+
+![image-20241025235515462](../Library/Application Support/typora-user-images/image-20241025235515462.png)
+
+![image-20241025235545502](../Library/Application Support/typora-user-images/image-20241025235545502.png)
+
+左半部分（CL+reg）就是已经讲的那一块，可以重复很多次，块之内/不同块之间可以有feedback
+
+![image-20241026000416142](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410260004253.png)
+
+![image-20241026000556811](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410260005867.png)
+
+![image-20241026001100659](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410260011708.png)
+
+
+
+# LEC16
+
+一共2^16^种
+
+![image-20241026001607348](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410260016433.png)
+
+![image-20241026002323916](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410260023964.png)
+
+2bit adder easy to build, how about 32bit? cannot use truth table
+
+![image-20241026002444166](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410260024225.png)
+
+
+
+Logic Gates
+
+![image-20241026002715358](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410260027423.png)
+
+treat xor treat
+
+![image-20241026003538881](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410260035974.png)
+
+![image-20241026143315313](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410261433528.png)
+
+![image-20241026145000096](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410261450152.png)
+
+PS = PS1 PS0, present state, NS next strate, FSM finite state machine
+
+![image-20241026144944986](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410261449149.png)
+
+Boolean Algebra
+
+![image-20241026145650439](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410261456504.png)
+
+![image-20241026150352042](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410261503173.png)
+
+Laws of Boolean Algebra
+
+![image-20241026161246387](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410261612915.png)
+
+![image-20241026161306168](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410261613227.png)
+
+Canonical forms (Sum-of-products)
+
+![image-20241026161804405](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410261618479.png)
+
+![image-20241027224849225](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410272248406.png)
+
+we don't go from truth table to gate diagram
+
+![image-20241026162805340](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410261628404.png)
+
+
+
+# LEC17
+
+Data Multiplexor, S=0则选A, S=1则选B
+
+![image-20241026163520568](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410261635671.png)
+
+![image-20241026163710431](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410261637498.png)
+
+![image-20241026164302401](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410261643498.png)
+
+![image-20241026164728332](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410261647397.png)
+
+ALU
+
+![image-20241026170926045](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410261709150.png)
+
+![image-20241026171043816](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410261710906.png)
+
+Adder / Subtracter Design
+
+![image-20241026171644664](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410261716753.png)
+
+LSB 无进位c
+
+![image-20241026171935203](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410261719286.png)
+
+![image-20241026171945205](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410261719257.png)
+
+![image-20241026172411192](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410261724286.png)
+
+unsigned computation overflow: cn = 1
+
+![image-20241026173602657](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410261736759.png)
+
+signed computation overflow
+
+The reason why we loved 2's complement number is they are the same as unsignec except the overflow trigger
+
+if unsigned, blue boxes overflow; if signed, red boxes overflow; c2 XOR c1 trigger the overflow. (For n bit, also just need to look at highest bit or sign bit)
+
+![image-20241026175013806](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410261750938.png)
+
+Subtractor, SUB = 1 -> b取反加一，加一在c0
+
+![image-20241026180231283](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410261802359.png)
+
+![image-20241026180714076](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202410261807197.png)
+
 
 
 # LEC18 build a RISCV processor/CPU
@@ -1322,7 +1580,7 @@ insert registers, Pipeline registers separate stages, hold data for each instruc
 
 
 
-pipeline hazard 危险；control hazard是
+三种pipeline hazard 危险
 
 ![image-20240101171631458](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401011716501.png)
 
@@ -1376,21 +1634,63 @@ control mux: if source reg == des reg != x0, then forward
 
 # LEC23
 
- 
+Forwarding 可以解决data hazard，但是解决不了load data hazard
+
+无法forward到一个周期前的地方（黄线），只能stall；但是蓝线和绿线可以通过forward解决 
+
+![image-20240107151617995](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401071516105.png)
+
+![image-20240107152135750](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401071521816.png)
+
+Put 与load的内容无关的 instruction into load delay slot，编译器的新任务
+
+![image-20240107152642024](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401071526093.png)
+
+compiler调整指令顺序，9cycle -> 7cycle
+
+![image-20240107153000373](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401071530429.png)
 
 
 
+Control hazard: branch & jump
+
+要ALU比较t0,t1是否相等之后才知道会不会跳转，即前两个周期不知道要不要继续执行指令，应该 stall 2 cycle
+
+![image-20240107154418776](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401071544867.png)
+
+避免stall，在branch结果出来之后控制control bit，如果预测错误则取消执行一半的两条指令（刷新pipeline）
+
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401071548786.png" alt="image-20240107154822685" style="zoom:25%;" />
+
+![image-20240107154844257](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401071548298.png)
+
+用1bit记录上次跳转了没有，以此预测下一次是否会跳转；更复杂的predictor可以达到90%准确率，见CS152
+
+![image-20240107155536027](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401071555125.png)
 
 
 
+superscalar processor
 
+Clock rate被晶体管速度和发热限制；提升performance可以进一步细分stage数量/deep pipeline（虽然90%的processor都是5-stage）
 
+![image-20240107160840600](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401071608708.png)
 
+CPI 每指令周期（Cycle Per Instruction），superscalar CPI<1了；issue 分配；多个execution unit pipeline，每个专门用于执行某一类型的指令；every cycle fetch&decode multiple instructions, issue to different execution unit pipeline；16 BIPS billion instructions per second， 
 
+![image-20240107161519634](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401071615739.png)
 
+![image-20240107162359810](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401071623853.png)
 
+![image-20240107162941746](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401071629791.png)
 
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401071630678.png" alt="image-20240107163058635" style="zoom:25%;" />
 
+x86的指令长度不等 
+
+![image-20240107163205402](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401071632446.png)
+
+![](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202401071635980.png)
 
 
 
@@ -1548,7 +1848,7 @@ Direct-Mapped Cache example；memory中value都是4Byte为单位
 
 average access time = miss penalty * miss rate
 
- ![image-20231109110906562](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202311091109595.png)
+![image-20231109110906562](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202311091109595.png)
 
 cache miss：1、because of cold cache；2、memory中两个蓝色的part在cache中竞争同一个位置（可解决）
 
@@ -1604,7 +1904,7 @@ LRU，4-way有4! = 24种顺序，要5bit来存储；random经常表现最好；L
 
 example
 
- ![image-20231109144937395](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202311091449476.png)
+![image-20231109144937395](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202311091449476.png)
 
 ![image-20231109144956856](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202311091449891.png)
 
