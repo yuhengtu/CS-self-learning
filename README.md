@@ -2,11 +2,11 @@
 
 This is a CS self learning repository following [csdiy](https://csdiy.wiki/).
 
-No credits, no GPA, pursue knowledge, to collide with the the smartest brains of humanity.
+No credits, no GPA, pursue knowledge, to collide with the smartest brains of humanity.
 
 Thanks for the open source courses and materials.
 
-If I have uploaded inappropriate content, please contact me at yuhengtuece@gmail.com and I will delete it immediately.
+If I have uploaded inappropriate content, please contact me at yuhengtuece@gmail.com, and I will delete it immediately.
 
 # Contents
 
@@ -38,3 +38,4 @@ If I have uploaded inappropriate content, please contact me at yuhengtuece@gmail
   - UMASS Network 20fa
 - Software Engineering
   - UCLA CS130 25fa
+
