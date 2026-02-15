@@ -4,42 +4,61 @@ This is a CS self-study repository following [csdiy](https://csdiy.wiki/).
 
 No credits, no GPA, pursue knowledge, to collide with the smartest brains of humanity.
 
-Thanks for the open source courses and materials.
-
 If I have uploaded inappropriate content, please contact me at yuhengtuece@gmail.com, and I will delete it immediately.
 
 # Outline
 
-- Linear Algebra
-  - MIT 18.06 11fa
-  - 3B1B Linear Algebra
-- Computer Science Overview
-  - Crash Course CS
-- Basic Programming
-  - UCB CS61A 20su
-  - Acwing C++ Grammar
-  - SEU Python & Data Science 22sp
-- Data Structure & Algorithm
-  - UCB CS170 24sp
-  - Acwing Data Structure & Algorithm
-
-- Machine Learning / Artificial Intelligence
-  - Coursera ML 22
-  - UCB CS189 24sp
-  - NTU DL(HUNGYI-LEE) 22sp
-  - Stanford CS336 25sp
-- Cryptography
-  - UCB CS171 24sp
-
-- Signal Processing
-  - MIT Signal & System 11sp
-- Computer Architecture
-  - UCB CS61C 20fa
-- Computer Networking
-  - UMASS Network 20fa
-- Software Engineering
-  - UCLA CS130 25fa
-- Statistical Finance
-  - UCLA StatsC283 25fa
-
+```
+tree -I "README.md" -L 3
+.
+├── CS_Elementary
+│   ├── Cpp
+│   │   └── Acwing_code
+│   ├── Overview
+│   │   └── Crash-Course-CS_note.pdf
+│   └── Python
+│       ├── SEU-Python-and-Data-Science_code
+│       ├── UCB-CS61A-20su_hw
+│       ├── UCB-CS61A-20su_lab
+│       ├── UCB-CS61A-20su_note.md
+│       └── UCB-CS61A-20su_prj
+├── CS_MLAI
+│   ├── CV
+│   │   └── UCLA-CS163-25fa_review.pdf
+│   ├── DL
+│   │   ├── NTU-DL-22sp_hw
+│   │   └── NTU-DL-22sp_note.md
+│   ├── LLM
+│   │   └── Stanford-CS336-25sp_note.md
+│   └── ML
+│       ├── Coursera-ML-22_note.md
+│       ├── UCB-CS189-24sp_cheat.pdf
+│       └── UCB-CS189-24sp_note.md
+├── CS_System
+│   ├── Computer-Architecture
+│   │   └── UCB-CS61C-20fa_note.md
+│   ├── Computer-Network
+│   │   └── UMASS-Network_note.md
+│   └── Software-Engineering
+│       ├── UCLA-CS130-25fa_note.md
+│       └── UCLA-CS130-25fa_prj
+├── CS_Theory
+│   ├── Cryptography
+│   │   ├── UCB-CS171-24sp_cheat.pdf
+│   │   └── UCB-CS171-24sp_note.md
+│   └── Data-Structure-and-Algorithm
+│       ├── Acwing_code
+│       ├── UCB-CS170-24sp_cheat.pdf
+│       └── UCB-CS170-24sp_note.md
+└── Math
+    ├── Linear-Algebra
+    │   ├── 3B1B_note.pdf
+    │   ├── MIT-1806-11fa_hw.pdf
+    │   └── MIT-1806-11fa_note.pdf
+    ├── Signal-and-System
+    │   └── MIT-RES6007-11sp_note.pdf
+    └── Statistical-Finance
+        ├── UCLA-StatsC283-25fa_lecture-note
+        └── UCLA-StatsC283-25fa_note.pdf
+```
 
