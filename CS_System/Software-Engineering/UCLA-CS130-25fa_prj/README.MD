@@ -1,4 +1,4 @@
-This project is done with three wonderful collaborators: Leo Liu, Justin Mealey, and Simon Traub.
+This project is done with wonderful collaborators: Leo Liu, Justin Mealey, and Simon Traub, and our AIs.
 
 # Learning the Codebase
 
