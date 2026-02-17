@@ -1,1 +1,1 @@
-[UCLA-CS163-25fa_hw](https://github.com/UCLAdeepvision/CS163-Assignments-2025Fall)
+[UCLA-CS163-25fa](https://docs.google.com/document/d/1iFlyWOxa0BM9ve4tsBzA91K3qNn1WvQDGzE6IkyFv68): Great couse. I served as a reader for this course. Very high-quality homework.

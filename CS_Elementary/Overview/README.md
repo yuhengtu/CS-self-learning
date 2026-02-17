@@ -1,1 +1,1 @@
-[Crash-Course-CS](https://www.youtube.com/playlist?list=PL8dPuuaLjXtNlUrzyH5r6jN9ulIgZBpdo)
+[Crash-Course-CS](https://www.youtube.com/playlist?list=PL8dPuuaLjXtNlUrzyH5r6jN9ulIgZBpdo): Great course for getting an overview of computer science.
