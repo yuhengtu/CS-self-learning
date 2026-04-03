@@ -36,8 +36,10 @@ tree -I "README.md" -L 3
 │   │   ├── UCB-CS189-24sp_cheat.pdf
 │   │   └── UCB-CS189-24sp_note.md
 │   └── RL
-│       ├── NTU-DL-22sp_note.md
-│       └── UCLA-CS260R-26wi_note.md
+│       ├── UCLA-CS260R-26wi_note.md
+│       ├── Westlake-MathFoundationofRL_note.pdf
+│       ├── rl_distilled.pdf
+│       └── rl-others_note.md
 ├── CS_System
 │   ├── Computer-Architecture
 │   │   └── UCB-CS61C-20fa_note.md
@@ -55,15 +57,19 @@ tree -I "README.md" -L 3
 │       ├── UCB-CS170-24sp_cheat.pdf
 │       └── UCB-CS170-24sp_note.md
 ├── Math
+│   ├── Calculus
 │   ├── Linear-Algebra
 │   │   ├── 3B1B_note.pdf
 │   │   ├── MIT-1806-11fa_hw.pdf
-│   │   └── MIT-1806-11fa_note.pdf
+│   │   ├── MIT-1806-11fa_note.pdf
+│   │   └── UCLA-EE205A-26wi_note.pdf
 │   └── Signal-and-System
 │       └── MIT-RES6007-11sp_note.pdf
 └── Statistics
-    └── Finance
-        ├── UCLA-StatsC283-25fa_lecture-note
-        └── UCLA-StatsC283-25fa_note.pdf
+    ├── Finance
+    │   ├── UCLA-StatsC283-25fa_lecture-note
+    │   └── UCLA-StatsC283-25fa_note.pdf
+    └── Uncertainty-Quantification
+        └── UCLA-Stats201B-25wi_note.pdf
 ```
 
