@@ -6,14 +6,30 @@ No credits, no GPA, pursue knowledge, to collide with the smartest brains of hum
 
 If I have uploaded inappropriate content, please contact me at yuhengtuece@gmail.com, and I will delete it immediately.
 
+
+
 # Outline
 
+The highest-quality materials in this repo are those labeled “distilled.” They are curated following my own logic, synthesizing content from all the courses I studied on the topic. I would use these materials if I were to teach the topic.
+
+```bash
+find . -iname '*distilled*'
+./CS_MLAI/RL/rl_distilled.pdf
+./Math/Linear-Algebra/linalg_distilled.pdf
+./CS_Elementary/Cpp/cpp_distilled
 ```
+
+
+
+Directory Structure:
+
+```bash
 tree -I "README.md" -L 3
 .
 ├── CS_Elementary
 │   ├── Cpp
-│   │   └── Acwing_code
+│   │   ├── Acwing_code
+│   │   └── cpp_distilled
 │   ├── Overview
 │   │   └── Crash-Course-CS_note.pdf
 │   └── Python
@@ -35,16 +51,17 @@ tree -I "README.md" -L 3
 │   │   ├── Coursera-ML-22_note.md
 │   │   ├── UCB-CS189-24sp_cheat.pdf
 │   │   └── UCB-CS189-24sp_note.md
+│   ├── NLP
 │   └── RL
 │       ├── UCLA-CS260R-26wi_note.md
 │       ├── Westlake-MathFoundationofRL_note.pdf
-│       ├── rl_distilled.pdf
-│       └── rl-others_note.md
+│       ├── rl-others_note.md
+│       └── rl_distilled.pdf
 ├── CS_System
 │   ├── Computer-Architecture
 │   │   └── UCB-CS61C-20fa_note.md
 │   ├── Computer-Network
-│   │   └── UMASS-Network_note.md
+│   │   └── UMass-Network_note.md
 │   └── Software-Engineering
 │       ├── UCLA-CS130-25fa_note.md
 │       └── UCLA-CS130-25fa_prj
@@ -59,17 +76,19 @@ tree -I "README.md" -L 3
 ├── Math
 │   ├── Calculus
 │   ├── Linear-Algebra
-│   │   ├── 3B1B_note.pdf
+│   │   ├── 3B1B-linalg_note.pdf
 │   │   ├── MIT-1806-11fa_hw.pdf
 │   │   ├── MIT-1806-11fa_note.pdf
-│   │   └── UCLA-EE205A-26wi_note.pdf
+│   │   ├── MeditationMath-linalg_note.pdf
+│   │   ├── UCLA-EE205A-26wi_note.pdf
+│   │   └── linalg_distilled.pdf
 │   └── Signal-and-System
 │       └── MIT-RES6007-11sp_note.pdf
-└── Statistics
+└── Stats
     ├── Finance
     │   ├── UCLA-StatsC283-25fa_lecture-note
     │   └── UCLA-StatsC283-25fa_note.pdf
-    └── Uncertainty-Quantification
+    └── Statistical-Inference
         └── UCLA-Stats201B-25wi_note.pdf
 ```
 
