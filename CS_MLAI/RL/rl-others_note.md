@@ -1,8 +1,10 @@
 # [NTU-DL-22sp](https://speech.ee.ntu.edu.tw/~hylee/ml/2022-spring.php) LEC12
 
-![image-20251105221258212](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202602071532942.png)
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202602071532942.png" alt="image-20251105221258212" style="zoom:25%;" />
 
-<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202602071532793.png" alt="image-20251105221412621" style="zoom:25%;" /><img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202511052215041.png" alt="image-20251105221531996" style="zoom:25%;" />
+---
+
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202602071532793.png" alt="image-20251105221412621" style="zoom:20%;" /><img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202511052215041.png" alt="image-20251105221531996" style="zoom:20%;" />
 
 早期的policy并不是network而是一个look up table
 
@@ -24,7 +26,7 @@ reward depend on both action and observation, e.g., only when action is fire can
 
 看起来像RNN，但是不一样在于输出a是sample得到的，有随机性；env and reward are also random
 
-![image-20251105222743319](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202602071532166.png)
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202602071532166.png" alt="image-20251105222743319" style="zoom:25%;" />
 
 policy gradient
 
@@ -48,65 +50,61 @@ normalize the reward value, e.g., -b (baseline value)
 
 A is reward; collecting data is expensive and time-consuming
 
-![image-20251105230106193](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202602071532363.png)![image-20251105230335374](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202602071532060.png)
+![image-20251105230106193](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202602071532363.png)<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202602071532060.png" alt="image-20251105230335374" style="zoom:25%;" />
 
 off policy can save the data collecion cost in for loop；off policy 要意识到自己不是和环境interact的那个人
 
 <img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202511052307323.png" alt="image-20251105230719271" style="zoom:25%;" /><img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202511052310275.png" alt="image-20251105231047212" style="zoom:30%;" />
 
-
+---
 
 Actor Critic
 
 G1‘ is discounted cumulated reward; 得到G1‘本来要玩完游戏，value fn用来没玩完游戏就预测G1‘，$V^\theta$的$\theta$表示value fn在观察参数为$\theta$的actor，同样的s，不同的$\theta$应该得到不同的value fn输出
 
-![image-20251106002229570](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202602071532466.png)
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202602071532466.png" alt="image-20251106002229570" style="zoom:25%;" />
 
 训练critic
 
-![image-20251106003043944](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202602071532269.png)
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202602071532269.png" alt="image-20251106003043944" style="zoom:25%;" />
 
 另一种方法，只需要一个t的数据就可以训练，训练$V^\theta(s_t) - \gamma V^\theta(s_{t+1})$
 
-![image-20251106003212432](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202602071532934.png)
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202602071532934.png" alt="image-20251106003212432" style="zoom:25%;" />
 
 2种方法在同样数据训练结果可能不一样，例子当中MC结果是0，但是TD结果是3/4（TD式子中的r是ra）
 
-![image-20251106003631377](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202602071532145.png)
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202602071532145.png" alt="image-20251106003631377" style="zoom:25%;" />
 
 set normalization term b to be critic
 
-![image-20251106004252804](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202511060042870.png)![image-20251106004325569](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202602071532426.png)
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202511060042870.png" alt="image-20251106004252804" style="zoom:25%;" /><img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202602071532426.png" alt="image-20251106004325569" style="zoom:25%;" />
 
 value fn output is like an expectation value, 图中G是cumulative reward (没有discount，discount之后notation是G'，现实中是用discount，这里只是demonstration需要), average G is V
 
-![image-20251106004447847](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202511060044894.png)
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202511060044894.png" alt="image-20251106004447847" style="zoom:25%;" />
 
 常用的Advantage actor-critic reward
 
 rt is the actual reward after at; At解释为采取at这个行动得到的平均reward和不采取at得到的平均reward的差值，加上immediate reward rt
 
-![image-20251106005945341](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202511060059450.png)
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202511060059450.png" alt="image-20251106005945341" style="zoom:25%;" />
 
 可以共用参数
 
 <img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202602071532213.png" alt="image-20251106011522592" style="zoom:25%;" />
 
-DQN
-
-<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202602071532081.png" alt="image-20251106011613294" style="zoom:25%;" />
-
-
+---
 
 Sparse reward，如下围棋一局结束才有reward；如机械臂拧螺丝，随机初始化之后乱动，无法拧紧螺丝获得reward
 
 reward shaping就是设计其他细小的reward，避免只看结果
 
-![image-20251106143420806](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202602071532922.png)
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202602071532922.png" alt="image-20251106143420806" style="zoom:25%;" />
 
 打设计游戏，活着就扣分，强迫agent去杀敌人
 
-![image-20251106144315269](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202511061443396.png)
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202511061443396.png" alt="image-20251106144315269" style="zoom:25%;" />
 
 Curiosity based reward，不给sparse reward（如通关游戏加分），只说让机器探索到有意义的新东西就给reward，即可通过部分关卡
 
@@ -118,7 +116,7 @@ No reward；人定的reward会被hack
 
 记录人类（expert）和环境互动作为示范
 
-![image-20251106145354960](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202602071532819.png)
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202602071532819.png" alt="image-20251106145354960" style="zoom:25%;" />
 
 可能没见过失败情况；可能无法区分人类的个人特质（无需学习）和普遍行为（需要学习）
 
@@ -126,7 +124,7 @@ No reward；人定的reward会被hack
 
 inverse RL: 用expert行为学reward fn
 
-![image-20251106150001540](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202602071532384.png)
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202602071532384.png" alt="image-20251106150001540" style="zoom:25%;" />
 
 假设老师的行为可以取得最高reward（注意，不是完全模仿老师行为） ；similar to GAN
 
@@ -136,11 +134,11 @@ robot IRL
 
 ![image-20251106151542418](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202511061515517.png)![image-20251106151534905](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202511061515009.png)
 
+---
 
+Math of Policy Gradient
 
-math of policy gradient
-
-![image-20251106152135879](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202602071532933.png)
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202602071532933.png" alt="image-20251106152135879" style="zoom:25%;" />
 
 Total reward is random, we treat it as random variable and maximize the expected value
 
@@ -156,15 +154,15 @@ $p(r_1, s_2|s_1,a_1)$ depends on the environment
 
 除p起到normalization作用；假设4个trajectory看见了同一个observation s，几率大的action b reward小，不normalize会倾向action b
 
-<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202511061829786.png" alt="image-20251106182934722" style="zoom:25%;" />![image-20251106183403572](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202602071533089.png)
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202511061829786.png" alt="image-20251106182934722" style="zoom:25%;" /><img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202602071533089.png" alt="image-20251106183403572" style="zoom:25%;" />
 
-
+---
 
 PPO
 
 importance sampling: we cannot sample from distri p, we can only sample from distri q
 
-![image-20251106184458674](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202602071533067.png)
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202602071533067.png" alt="image-20251106184458674" style="zoom:25%;" />
 
 p和q不能差太多；需要sample很多次，sample到negative的绿色点才行
 
@@ -172,17 +170,15 @@ p和q不能差太多；需要sample很多次，sample到negative的绿色点才�
 
 训练$\theta$，$\theta'$只负责和环境互动
 
-![image-20251106185934181](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202602071533032.png)
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202602071533032.png" alt="image-20251106185934181" style="zoom:25%;" />
 
 A is advantage, suppose $p_\theta(s_t) = p_{\theta'}(s_t)$; J is objective fn
 
-![image-20251106190517447](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202602071533101.png)
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202602071533101.png" alt="image-20251106190517447" style="zoom:25%;" />
 
 为了让$\theta$和$\theta'$不要差太多，PPO add a KL divergence as constraint (TRPO set a separate constraint)；KL divergence算的是input同样一个state，output的action背后的prob distribution的差异
 
-![image-20251106191021033](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202511061910109.png)
-
-![image-20251106191637625](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202511061916746.png)
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202511061910109.png" alt="image-20251106191021033" style="zoom:25%;" /><img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202511061916746.png" alt="image-20251106191637625" style="zoom:25%;" />
 
 PPO2：选两项中小的进行优化（min(第一项，第二项)）
 
@@ -212,7 +208,7 @@ To deal with negative reward, use exp, which turns into sigmoid
 
 ![image-20251106230125977](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202602071533194.png)
 
-![image-20251106230613830](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202602071533305.png)
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202602071533305.png" alt="image-20251106230613830" style="zoom:25%;" />
 
 ![image-20251106230834211](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202602071533769.png)
 

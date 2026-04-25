@@ -74,9 +74,10 @@ int main() {
     
     // delete
     delete head; // call destructor
+    head = nullptr;
     // same to the following code if we do not write the destructor ~Node()
     // Node* p = head;
-    // while (p) {
+    // while (p) {  // in cpp, 0 and nullptr are false, all others are true
     //     Node* next = p->next;
     //     delete p;
     //     p = next;

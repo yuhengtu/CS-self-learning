@@ -16,7 +16,6 @@ The highest-quality materials in this repo are those labeled “distilled.” Th
 find . -iname '*distilled*'
 ./CS_MLAI/RL/rl_distilled.pdf
 ./Math/Linear-Algebra/linalg_distilled.pdf
-./CS_Elementary/Cpp/cpp_distilled
 ```
 
 
@@ -29,7 +28,7 @@ tree -I "README.md" -L 3
 ├── CS_Elementary
 │   ├── Cpp
 │   │   ├── Acwing_code
-│   │   └── cpp_distilled
+│   │   └── c_cpp_distilling
 │   ├── Overview
 │   │   └── Crash-Course-CS_note.pdf
 │   └── Python
@@ -39,11 +38,10 @@ tree -I "README.md" -L 3
 │       ├── UCB-CS61A-20su_note.md
 │       └── UCB-CS61A-20su_prj
 ├── CS_MLAI
-│   ├── CV
-│   │   └── UCLA-CS163-25fa_review.pdf
-│   ├── DL
+│   ├── DL-NLP-CV
 │   │   ├── NTU-DL-22sp_hw
-│   │   └── NTU-DL-22sp_note.md
+│   │   ├── NTU-DL-22sp_note.md
+│   │   └── UCLA-CS163-25fa_review.pdf
 │   ├── LLM
 │   │   ├── NTU-DL_note.md
 │   │   └── Stanford-CS336-25sp_note.md
@@ -51,7 +49,6 @@ tree -I "README.md" -L 3
 │   │   ├── Coursera-ML-22_note.md
 │   │   ├── UCB-CS189-24sp_cheat.pdf
 │   │   └── UCB-CS189-24sp_note.md
-│   ├── NLP
 │   └── RL
 │       ├── UCLA-CS260R-26wi_note.md
 │       ├── Westlake-MathFoundationofRL_note.pdf
@@ -77,7 +74,7 @@ tree -I "README.md" -L 3
 │   ├── Calculus
 │   ├── Linear-Algebra
 │   │   ├── 3B1B-linalg_note.pdf
-│   │   ├── MIT-1806-11fa_hw.pdf
+│   │   ├── MIT-1806-11fa_hw-dis-exam.pdf
 │   │   ├── MIT-1806-11fa_note.pdf
 │   │   ├── MeditationMath-linalg_note.pdf
 │   │   ├── UCLA-EE205A-26wi_note.pdf

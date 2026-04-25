@@ -96,10 +96,6 @@ Imitation learning: https://github.com/HumanCompatibleAI/imitation
 
 ![image-20260108103813766](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202601081038130.png)
 
-https://openreview.net/pdf?id=4OsgYD7em5
-
-![image-20260308174945082](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202603081749118.png)
-
 ![image-20260308175105449](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202603081751498.png)
 
 https://old.reddit.com/r/MachineLearning/comments/xfmqny/d_what_happened_to_reinforcement_learning/
@@ -112,7 +108,7 @@ For RL, the model may achieve super-human performance (Upper bound for supervise
 
 <img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202601081043299.png" alt="image-20260108104308274" style="zoom:25%;" /><img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202601081043883.png" alt="image-20260108104331858" style="zoom:25%;" /><img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202601131016411.png" alt="image-20260113101614260" style="zoom:25%;" />
 
-
+---
 
 Trajectory $H_t=O_1,R_1,A_1,...,A_{t-1},O_t,R_t$: the sequence of observations, rewards, actions
 
@@ -158,7 +154,7 @@ Policy-based & Value-based
 
 ![image-20260108111349652](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202601081113688.png)![image-20260108111405501](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202601081114536.png)
 
-
+---
 
 Types of RL Agents
 
@@ -180,7 +176,7 @@ Types of RL Agents
 
 ![image-20260108111809807](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202601081118849.png)
 
-
+---
 
 Planning VS RL
 
@@ -193,13 +189,13 @@ Planning VS RL
 
 ![image-20260108112019040](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202601081120064.png)![image-20260108112034231](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202601081120270.png)
 
-
+---
 
 Contextual Bandits is widely applied to content recommendations, dynamic pricing: https://www.geteppo.com/blog/netflix-lyft-yahoo-contextual-bandits
 
 ![image-20260108112418217](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202601081124242.png)
 
-
+---
 
 OpenAI: (used to be) specialized in RL: https://github.com/openai/retro/tree/develop, https://github.com/openai/gym
 
@@ -235,7 +231,7 @@ Exploitation:
 
 ![image-20260113151950727](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202601131519808.png)
 
-
+---
 
 1. Markov Processes
 
@@ -282,7 +278,7 @@ Algorithms to avoid matrix inverse:
 
 
 
-turn Markov Decision Process into Markov Reward Process: $P^\pi(s^{\prime}|s)=\sum_{a\in A}\pi(a|s)P(s^{\prime}|s,a), R^\pi(s)=\sum_{a\in A}\pi(a|s)R(s,a)$
+Turn Markov Decision Process into Markov Reward Process: $P^\pi(s^{\prime}|s)=\sum_{a\in A}\pi(a|s)P(s^{\prime}|s,a), R^\pi(s)=\sum_{a\in A}\pi(a|s)R(s,a)$
 
 MP/MRP VS MDP
 
@@ -300,7 +296,7 @@ Bellman Expectation Equation (expectation over policy $\pi$):
 
 ![image-20260115180139775](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202601151801842.png)
 
-
+---
 
 Two kinds of problems in MDP:
 
@@ -358,7 +354,7 @@ Summary
 
 ![image-20260116004040385](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202601160040488.png)
 
-
+---
 
 If state set is very large, DP may be very slow. Asychronous DP do not sweep over state space
 
@@ -436,7 +432,7 @@ Q-learning can be considered as sample update of value iteration
 - value iteration: use the expected value over the transition dynamics
 - Q-learning: use the sample collected from the environment
 
-
+---
 
 Eligibility Traces
 
@@ -480,7 +476,7 @@ TD(0) uses semi-gradient, which means the target depends on parameter w, but dur
 
 TD/Sarsa/Q-learning with value fn don’t follow the gradient of any objective functioncan, can diverge when off-policy or using non-linear fn
 
-
+---
 
 Batch RL: replay buffer / Least-squares policy evaluation (a third method for policy eval besides MC and TD)
 
@@ -504,13 +500,13 @@ Convergence of Control Methods
 
 ![image-20260308191613129](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202603081916256.png)
 
-
+---
 
 DQN from DeepMind’s Nature paper
 
 Instability: Nonlinear function approximation, Bootstrapping, Off-policy training
 
-![image-20260308202812778](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202603082028896.png)
+<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202603082028896.png" alt="image-20260308202812778" style="zoom:25%;" />
 
 
 
@@ -532,15 +528,17 @@ the action on grey states must be the same
 
 <img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202603082048979.png" alt="image-20260308204810879" style="zoom:25%;" /><img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202603082048445.png" alt="image-20260308204858335" style="zoom:25%;" />
 
+
+
 objective fn
 
 ![image-20260308204958057](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202603082049160.png)
 
-
-
 optimization methods
 
 ![image-20260308205153010](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202603082051115.png)
+
+
 
 Derivative-free methods
 
@@ -652,7 +650,7 @@ State-of-the-art RL methods are almost all policy-based: A2C, A3C, TRPO, PPO
 
 ![image-20260309180851978](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202603091808027.png)
 
-
+---
 
 Policy gradient is on-policy and thus inefficient; and also unstable
 
@@ -708,7 +706,7 @@ PPO -> PPO2: clipped PPO
 
 <img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202603091801818.png" alt="image-20260309180118715" style="zoom:20%;" /><img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202603091802668.png" alt="image-20260309180205564" style="zoom:20%;" /><img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202603091802464.png" alt="image-20260309180217362" style="zoom:25%;" />
 
-
+---
 
 DDPG
 
@@ -746,7 +744,7 @@ Model-free RL: learn value/policy from experience
 
 <img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202603091846195.png" alt="image-20260309184654040" style="zoom:25%;" />![image-20260309185013322](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202603091850439.png)<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202603091856911.png" alt="image-20260309185632752" style="zoom:20%;" />
 
-
+---
 
 **Model-based RL**
 
@@ -760,7 +758,7 @@ Model-free RL: learn value/policy from experience
 
   - difficult to have guarantee of convergence (First learning a model then constructing value or policy fn leads to two sources of approximation error)
 
-
+---
 
 **Model-based value optimization**
 
@@ -794,7 +792,7 @@ assume deterministic env, (s,a) gives deterministic (s',r), store them in memory
 
 ![image-20260309191037039](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202603091910141.png)<img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202603091916397.png" alt="image-20260309191633276" style="zoom:25%;" />
 
-
+---
 
 **Model-based policy optimization**
 
@@ -814,7 +812,7 @@ The env model
 
 <img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202603101626337.png" alt="image-20260310162640181" style="zoom:25%;" /><img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202603101628305.png" alt="image-20260310162844127" style="zoom:25%;" />
 
-
+---
 
 **Case studies on robot object manipulation and learning world models from images**
 
@@ -840,7 +838,7 @@ Outline [see original slide for detailed case studies]
 
 ![image-20260310165031219](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202603101650396.png)
 
-
+---
 
 **Imitation Learning**: Supervised learning of the policy network
 
@@ -848,13 +846,13 @@ Using GenAI or world model to synthesize off-course situations
 
 ![image-20260310165152087](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202603101651278.png)![image-20260310165531946](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202603101657057.png)
 
-
+---
 
 **DAGGER**, run current policy and observe, ask human to label these observations
 
 ![image-20260310170104120](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202603101701217.png)![image-20260310165931788](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202603101659980.png)
 
-
+---
 
 **Interactive Imitation Learning**
 
@@ -868,7 +866,7 @@ Robot-Gated Intervention: Based on uncertainty estimation, agent requests human 
 
 <img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202603101718492.png" alt="image-20260310171848288" style="zoom:25%;" /><img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202603101720008.png" alt="image-20260310172019799" style="zoom:25%;" />
 
-
+---
 
 **Inverse RL and Generative Adversarial Imitation Learning(GAIL)**
 
@@ -878,7 +876,7 @@ Robot-Gated Intervention: Based on uncertainty estimation, agent requests human 
 
 <img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202603101727800.png" alt="image-20260310172733612" style="zoom:20%;" /><img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202603101728884.png" alt="image-20260310172820697" style="zoom:20%;" /><img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202603101728204.png" alt="image-20260310172832009" style="zoom:20%;" />
 
-
+---
 
 **Improving the Supervised Imitation Learning**
 
@@ -890,7 +888,7 @@ imitation data collection
 
 <img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202603101735970.png" alt="image-20260310173549779" style="zoom:20%;" /><img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202603101736947.png" alt="image-20260310173605759" style="zoom:20%;" /><img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202603101736195.png" alt="image-20260310173629996" style="zoom:20%;" />
 
-
+---
 
 **Unifying RL and Imitation Learning**
 
@@ -900,7 +898,7 @@ imitation data collection
 
 <img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202603101753856.png" alt="image-20260310175315649" style="zoom:20%;" /><img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202603101753417.png" alt="image-20260310175330234" style="zoom:20%;" /><img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202603101755891.png" alt="image-20260310175504699" style="zoom:20%;" />
 
-
+---
 
 **Case study**
 
@@ -914,7 +912,7 @@ Others
 
 <img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202603101813400.png" alt="image-20260310181306192" style="zoom:20%;" /><img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202603101813538.png" alt="image-20260310181357304" style="zoom:20%;" /><img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202603101814891.png" alt="image-20260310181426697" style="zoom:20%;" />
 
-
+---
 
 **Summary**
 
@@ -927,6 +925,8 @@ Others
 Outline [see original slide for detailed case studies]
 
 ![image-20260314101417438](https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202603141014559.png)
+
+---
 
 **Parallelism in Distributed ML Systems**
 
@@ -944,7 +944,7 @@ Outline [see original slide for detailed case studies]
 
 <img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202603141037603.png" alt="image-20260314103750517" style="zoom:20%;" /><img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202603141038806.png" alt="image-20260314103805740" style="zoom:20%;" />
 
-
+---
 
 **Development of Distributed RL Systems**
 
@@ -968,7 +968,7 @@ https://openai.com/blog/baselines-acktr-a2c/
 
 <img src="https://cdn.jsdelivr.net/gh/yuhengtu/typora_images@master/img/202603141054501.png" alt="image-20260314105423427" style="zoom:20%;" />
 
-
+---
 
 **Case Study**
 

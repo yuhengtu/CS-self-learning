@@ -1,1 +1,1 @@
-[UCB-CS61C-20fa](https://web.archive.org/web/20211127145057/https://inst.eecs.berkeley.edu/~cs61c/fa20/): Great course. I am not a system guy so I just watch the lectures. The homework looks very fun, I hope I’ll have time to try it someday. Thank you CS61C thank you.
+[UCB-CS61C-20fa](https://www.learncs.site/docs/curriculum-resource/cs61c/syllabus): Great course. I am not a system guy so I just watch the lectures. The homework looks very fun, I hope I’ll have time to try it someday. Thank you CS61C thank you.
